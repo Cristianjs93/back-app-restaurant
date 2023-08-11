@@ -9,5 +9,5 @@ ConfigExpress(app);
 routes(app);
 
 app.listen(port, () => {
-   console.log(`App listening on port ${port}`);
+   console.log(`Listening on port ${port}`);
 });
