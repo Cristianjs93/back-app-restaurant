@@ -29,11 +29,8 @@ export async function getRestaurantById(id: string) {
 }
 
 export async function createRestaurant(input: Restaurants) {
-   // const hashedPassword = await hashPassword(input.password);
-
    const data = {
       ...input
-      //   password: hashedPassword
    };
 
    const restaurant = await prisma.restaurants.create({
