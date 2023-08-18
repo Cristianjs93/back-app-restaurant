@@ -18,20 +18,55 @@ model Users {
   password  String
   isActive  Boolean  @default(false)
   Review    Review[]
-  role      Role[]
+  role      Role?    @relation(fields: [roleId], references: [id])
+  roleId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Order     Order[]
 }
 
 model Role {
-  id      String  @id @default(cuid())
-  name    String  @unique
-  user    Users?  @relation(fields: [usersId], references: [id])
-  usersId String?
+  id    String  @id @default(cuid())
+  name  String  @unique
+  Users Users[]
+}
+
+model Order {
+  id         String   @id @default(cuid())
+  detail     String
+  payment    Int
+  status     String
+  total      Int
+  services   Services @relation(fields: [servicesId], references: [id])
+  servicesId String
+  users      Users    @relation(fields: [usersId], references: [id])
+  usersId    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Services {
+  id    String  @id @default(cuid())
+  type  String
+  Order Order[]
+}
+
+model Products {
+  id           String      @id @default(cuid())
+  productName  String
+  price        Int
+  category     String
+  subcategory  String
+  description  String
+  image        String
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model Restaurants {
-  id           String   @id @default(cuid())
+  id           String       @id @default(cuid())
   nit          String
   businessName String
   title        String
@@ -39,52 +74,25 @@ model Restaurants {
   address      String[]
   about        String
   location     String[]
-  gallery      String[]
   reviews      Review[]
+  Products     Products[]
+  Gallery      Gallery[]
+  Facilities   Facilities[]
 }
 
-model Products {
-  id            String          @id @default(cuid())
-  productName   String
-  price         Int
-  category      String
-  subcategory   String
-  description   String
-  image         String
-  orderProducts OrderProducts[]
+model Gallery {
+  id           String      @id @default(cuid())
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  ImageUrl     String
 }
 
-model Booking {
-  id      String   @id @default(cuid())
-  type    Type
-  date    DateTime
-  time    DateTime
-  address String
-  detail  String
-  Order   Order[]
-}
-
-model OrderProducts {
-  id        String    @id @default(cuid())
-  order     Order     @relation(fields: [orderId], references: [id])
-  orderId   String
-  product   Products? @relation(fields: [productId], references: [id])
-  productId String
-}
-
-model Order {
-  id            String          @id @default(cuid())
-  date          DateTime
-  time          DateTime
-  totalPrice    Int
-  booking       Booking         @relation(fields: [typeId], references: [id])
-  typeId        String
-  OrderProducts OrderProducts[]
-}
-
-enum Type {
-  BOOKING
-  DELIVERY
+model Facilities {
+  id           String      @id @default(cuid())
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  phone        String
+  address      String[]
 }
 
 model Review {
