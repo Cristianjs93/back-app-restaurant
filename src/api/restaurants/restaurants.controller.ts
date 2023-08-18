@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Restaurants } from "./restaurants.types";
+import { AuthRequestRestaurants } from "../../auth/auth.types";
 import {
    getAllRestaurants,
    getRestaurantById,
@@ -48,25 +49,28 @@ export async function createRestaurantHandler(req: Request, res: Response) {
 
 export async function updateRestaurantHandler(req: Request, res: Response) {
    try {
-      const { data } = req.body;
+      const data = req.body;
 
-      const user = await updateRestaurant(data);
+      const restaurant = await updateRestaurant(data);
 
-      if (!user) {
+      if (!restaurant) {
          return res.status(404).json({
             message: "User not found"
          });
       }
 
-      res.status(200).json(user);
+      res.status(200).json(restaurant);
    } catch ({ message }: any) {
       res.status(400).json({ message });
    }
 }
 
-export async function deleteRestaurantHandler(req: Request, res: Response) {
+export async function deleteRestaurantHandler(
+   req: AuthRequestRestaurants,
+   res: Response
+) {
    try {
-      const { id } = req.params;
+      const { id } = req.body;
       const restaurant = await getRestaurantById(id);
 
       if (!restaurant) {
@@ -76,6 +80,7 @@ export async function deleteRestaurantHandler(req: Request, res: Response) {
       }
 
       await deleteRestaurant(id);
+      res.status(200).json(restaurant);
    } catch ({ message }: any) {
       res.status(400).json({ message });
    }
