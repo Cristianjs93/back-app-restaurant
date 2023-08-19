@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
-import { getUserByEmail } from '../../api/users/user.services.ts';
-import { comparePassword } from '../utils/bycript.ts';
-import { signToken } from '../auth.services.ts';
+import { getUserByEmail } from "../../api/users/user.services.ts";
+import { comparePassword } from "../utils/bycript.ts";
+import { signToken } from "../auth.services.ts";
 
 async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
@@ -11,13 +11,13 @@ async function loginHandler(req: Request, res: Response) {
     const user = await getUserByEmail(email);
 
     if (!user) {
-      return res.status(401).send('Invalid credentials');
+      return res.status(401).send("Invalid credentials");
     }
 
-    const isMatch = await comparePassword(password, user.password);
+    const isMatch: any = await comparePassword(password, user.password);
 
     if (!isMatch) {
-      return res.status(401).send('Invalid credentials');
+      return res.status(401).send("Invalid credentials");
     }
 
     const payload = {
