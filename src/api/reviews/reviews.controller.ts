@@ -12,8 +12,14 @@ export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
     return res.status(200).json(reviews);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (e: unknown) {
+    let message;
+    if (typeof e === 'string') {
+      message = e.toUpperCase();
+    } else if (e instanceof Error) {
+      message = e.message;
+    }
+    return res.status(400).send(message);
   }
 }
 
@@ -29,8 +35,14 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (e: unknown) {
+    let message;
+    if (typeof e === 'string') {
+      message = e.toUpperCase();
+    } else if (e instanceof Error) {
+      message = e.message;
+    }
+    return res.status(400).send(message);
   }
 }
 
@@ -39,8 +51,14 @@ export async function createReviewHandler(req: Request, res: Response) {
     const data = req.body;
     const review = await createReview(data);
     return res.status(201).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (e: unknown) {
+    let message;
+    if (typeof e === 'string') {
+      message = e.toUpperCase();
+    } else if (e instanceof Error) {
+      message = e.message;
+    }
+    return res.status(400).send(message);
   }
 }
 
@@ -55,8 +73,14 @@ export async function updateReviewHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (e: unknown) {
+    let message;
+    if (typeof e === 'string') {
+      message = e.toUpperCase();
+    } else if (e instanceof Error) {
+      message = e.message;
+    }
+    return res.status(400).send(message);
   }
 }
 
@@ -75,7 +99,13 @@ export async function deleteReviewHandler(
     }
 
     return await deleteReview(id);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (e: unknown) {
+    let message;
+    if (typeof e === 'string') {
+      message = e.toUpperCase();
+    } else if (e instanceof Error) {
+      message = e.message;
+    }
+    return res.status(400).send(message);
   }
 }
