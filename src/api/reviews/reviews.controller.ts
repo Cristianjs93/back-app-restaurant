@@ -1,84 +1,81 @@
-import { Request, Response } from "express";
-import { Reviews } from "./reviews.types";
-import { AuthRequestReviews } from "../../auth/auth.types";
+import { Request, Response } from 'express';
+import { AuthRequestReviews } from '../../auth/auth.types.ts';
 import {
-   getAllReviews,
-   getReviewById,
-   createReview,
-   updateReview,
-   deleteReview
-} from "./reviews.services";
+  getAllReviews,
+  getReviewById,
+  createReview,
+  updateReview,
+  deleteReview,
+} from './reviews.services.ts';
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
-   try {
-      const reviews = await getAllReviews();
-      res.status(200).json(reviews);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+  try {
+    const reviews = await getAllReviews();
+    return res.status(200).json(reviews);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function getReviewByIdHandler(req: Request, res: Response) {
-   try {
-      const { id } = req.params;
-      const review = await getReviewById(id);
+  try {
+    const { id } = req.params;
+    const review = await getReviewById(id);
 
-      if (!review) {
-         return res.status(404).json({
-            message: "Review not found"
-         });
-      }
+    if (!review) {
+      return res.status(404).json({
+        message: 'Review not found',
+      });
+    }
 
-      res.status(200).json(review);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return res.status(200).json(review);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function createReviewHandler(req: Request, res: Response) {
-   try {
-      const data = req.body;
-      const review = await createReview(data);
-      res.status(201).json(review);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+  try {
+    const data = req.body;
+    const review = await createReview(data);
+    return res.status(201).json(review);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function updateReviewHandler(req: Request, res: Response) {
-   try {
-      const data = req.body;
+  try {
+    const data = req.body;
 
-      const review = await updateReview(data);
+    const review = await updateReview(data);
 
-      if (!review) {
-         res.status(404).json({ message: "Review not found" });
-      }
+    if (!review) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
 
-      res.status(200).json(review);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return res.status(200).json(review);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function deleteReviewHandler(
-   req: AuthRequestReviews,
-   res: Response
+  req: AuthRequestReviews,
+  res: Response,
 ) {
-   try {
-      const { id } = req.body;
-      const review = await getReviewById(id);
+  try {
+    const { id } = req.body;
+    const review = await getReviewById(id);
 
-      if (!review) {
-         return res.status(404).json({
-            message: "User not found"
-         });
-      }
+    if (!review) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
 
-      await deleteReview(id);
-
-      res.status(200).json(review);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return await deleteReview(id);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_controller_1 = require("./user.controller");
+// import { isAuthenticated } from '../../auth/auth.controller';
+// import { hasRole } from '../../auth/auth.controller';
+const router = (0, express_1.Router)();
+router.get("/", user_controller_1.getAllUsersHandler);
+router.get("/user", user_controller_1.getUserByIdHandler);
+router.get("/user", user_controller_1.getUserByEmailHandler);
+router.post("/", user_controller_1.createUserHandler);
+router.put("/", user_controller_1.updateUserHandler);
+router.delete("/", user_controller_1.deleteUserHandler);
+exports.default = router;

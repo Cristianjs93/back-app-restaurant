@@ -1,87 +1,85 @@
-import { Request, Response } from "express";
-import { Restaurants } from "./restaurants.types";
-import { AuthRequestRestaurants } from "../../auth/auth.types";
+import { Request, Response } from 'express';
+import { AuthRequestRestaurants } from '../../auth/auth.types.ts';
 import {
-   getAllRestaurants,
-   getRestaurantById,
-   createRestaurant,
-   updateRestaurant,
-   deleteRestaurant
-} from "./restaurants.services";
+  getAllRestaurants,
+  getRestaurantById,
+  createRestaurant,
+  updateRestaurant,
+  deleteRestaurant,
+} from './restaurants.services.ts';
 
 export async function getAllRestaurantsHandler(req: Request, res: Response) {
-   try {
-      const restaurants = await getAllRestaurants();
-      res.status(200).json(restaurants);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+  try {
+    const restaurants = await getAllRestaurants();
+    return res.status(200).json(restaurants);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function getRestaurantByIdHandler(req: Request, res: Response) {
-   try {
-      const { id } = req.params;
-      const restaurant = await getRestaurantById(id);
+  try {
+    const { id } = req.params;
+    const restaurant = await getRestaurantById(id);
 
-      if (!restaurant) {
-         res.status(404).json({
-            message: "Restaurant not found"
-         });
-      }
+    if (!restaurant) {
+      return res.status(404).json({
+        message: 'Restaurant not found',
+      });
+    }
 
-      res.status(200).json(restaurant);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return res.status(200).json(restaurant);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function createRestaurantHandler(req: Request, res: Response) {
-   try {
-      const data = req.body;
+  try {
+    const data = req.body;
 
-      const restaurant = await createRestaurant(data);
+    const restaurant = await createRestaurant(data);
 
-      res.status(201).json(restaurant);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return res.status(201).json(restaurant);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function updateRestaurantHandler(req: Request, res: Response) {
-   try {
-      const data = req.body;
+  try {
+    const data = req.body;
 
-      const restaurant = await updateRestaurant(data);
+    const restaurant = await updateRestaurant(data);
 
-      if (!restaurant) {
-         res.status(404).json({
-            message: "User not found"
-         });
-      }
+    if (!restaurant) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
 
-      res.status(200).json(restaurant);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return res.status(200).json(restaurant);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }
 
 export async function deleteRestaurantHandler(
-   req: AuthRequestRestaurants,
-   res: Response
+  req: AuthRequestRestaurants,
+  res: Response,
 ) {
-   try {
-      const { id } = req.body;
-      const restaurant = await getRestaurantById(id);
+  try {
+    const { id } = req.body;
+    const restaurant = await getRestaurantById(id);
 
-      if (!restaurant) {
-         return res.status(404).json({
-            message: "User not found"
-         });
-      }
+    if (!restaurant) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
 
-      await deleteRestaurant(id);
-      res.status(200).json(restaurant);
-   } catch ({ message }: any) {
-      res.status(400).json({ message });
-   }
+    return await deleteRestaurant(id);
+  } catch ({ message }: any) {
+    return res.status(400).json({ message });
+  }
 }

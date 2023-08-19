@@ -1,62 +1,62 @@
-import { PrismaClient } from "@prisma/client";
-import { Restaurants } from "./restaurants.types";
+import { PrismaClient } from '@prisma/client';
+import { Restaurants } from './restaurants.types.ts';
 
 const prisma = new PrismaClient();
 
 export async function getAllRestaurants() {
-   const restaurants = await prisma.restaurants.findMany({
-      select: {
-         id: false,
-         title: true,
-         phone: true,
-         address: true,
-         about: true,
-         location: true,
-         reviews: true
-      }
-   });
-   return restaurants;
+  const restaurants = await prisma.restaurants.findMany({
+    select: {
+      id: false,
+      title: true,
+      phone: true,
+      address: true,
+      about: true,
+      location: true,
+      reviews: true,
+    },
+  });
+  return restaurants;
 }
 
 export async function getRestaurantById(id: string) {
-   const restaurants = await prisma.restaurants.findUnique({
-      where: {
-         id
-      }
-   });
+  const restaurants = await prisma.restaurants.findUnique({
+    where: {
+      id,
+    },
+  });
 
-   return restaurants;
+  return restaurants;
 }
 
 export async function createRestaurant(input: Restaurants) {
-   const data = {
-      ...input
-   };
+  const data = {
+    ...input,
+  };
 
-   const restaurant = await prisma.restaurants.create({
-      data
-   });
+  const restaurant = await prisma.restaurants.create({
+    data,
+  });
 
-   return restaurant;
+  return restaurant;
 }
 
 export async function updateRestaurant(data: Restaurants) {
-   const restaurants = await prisma.restaurants.update({
-      where: {
-         id: data.id
-      },
-      data
-   });
+  const restaurants = await prisma.restaurants.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
 
-   return restaurants;
+  return restaurants;
 }
 
 export async function deleteRestaurant(id: string) {
-   const restaurant = await prisma.restaurants.delete({
-      where: {
-         id
-      }
-   });
+  const restaurant = await prisma.restaurants.delete({
+    where: {
+      id,
+    },
+  });
 
-   return restaurant;
+  return restaurant;
 }

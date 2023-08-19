@@ -1,98 +1,67 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import { hashPassword } from "../../auth/utils/bcrypt";
-import { UserCredential, User } from "./user.types";
+import { hashPassword } from '../../auth/utils/bycript.ts';
+import { Users } from './user.types.ts';
 
 const prisma = new PrismaClient();
 
-export async function getAllUser() {
-   const users = await prisma.user.findMany({
-      select: {
-         id: false,
-         firstName: true,
-         lastName: true,
-         email: true,
-         avatar: true,
-         //
-         roles: {
-            select: {
-               Role: {
-                  select: {
-                     id: true,
-                     name: true
-                  }
-               }
-            }
-         }
-      }
-   });
-   return users;
+export async function getAllUsers() {
+  const users = await prisma.users.findMany();
+  return users;
 }
 
-export async function createUser(input: UserCredential) {
-   const hashedPassword = await hashPassword(input.password);
+export async function createUser(input: Users) {
+  const hashedPassword = await hashPassword(input.password);
 
-   const data = {
-      ...input,
-      password: hashedPassword
-   };
+  const data = {
+    ...input,
+    password: hashedPassword,
+  };
 
-   const user = await prisma.user.create({
-      data
-   });
+  const user = await prisma.users.create({
+    data,
+  });
 
-   return user;
+  return user;
 }
 
 export async function getUserById(id: string) {
-   const user = await prisma.user.findUnique({
-      where: {
-         id
-      }
-   });
+  const user = await prisma.users.findUnique({
+    where: {
+      id,
+    },
+  });
 
-   return user;
+  return user;
 }
 
 export async function getUserByEmail(email: string) {
-   const user = await prisma.user.findUnique({
-      where: {
-         email
-      },
-      include: {
-         roles: {
-            select: {
-               Role: {
-                  select: {
-                     id: true,
-                     name: true
-                  }
-               }
-            }
-         }
-      }
-   });
+  const user = await prisma.users.findUnique({
+    where: {
+      email,
+    },
+  });
 
-   return user;
+  return user;
 }
 
 export async function deleteUser(id: string) {
-   const user = await prisma.user.delete({
-      where: {
-         id
-      }
-   });
+  const user = await prisma.users.delete({
+    where: {
+      id,
+    },
+  });
 
-   return user;
+  return user;
 }
 
-export async function updateUser(data: User) {
-   const user = await prisma.user.update({
-      where: {
-         id: data.id
-      },
-      data
-   });
+export async function updateUser(data: Users) {
+  const user = await prisma.users.update({
+    where: {
+      id: data.id,
+    },
+    data,
+  });
 
-   return user;
+  return user;
 }

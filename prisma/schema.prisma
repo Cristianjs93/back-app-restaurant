@@ -8,61 +8,73 @@ datasource db {
 }
 
 model Users {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   firstname String
   lastname  String
   address   String
   phone     String
-  email     String   @unique
+  email     String    @unique
   age       Int
   password  String
-  isActive  Boolean  @default(false)
-  Review    Review[]
-  role      Role?    @relation(fields: [roleId], references: [id])
-  roleId    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Order     Order[]
+  isActive  Boolean   @default(false)
+  Review    Reviews[]
+  role      Roles     @relation(fields: [roleId], references: [id])
+  roleId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Order     Orders[]
 }
 
-model Role {
+model Roles {
   id    String  @id @default(cuid())
   name  String  @unique
   Users Users[]
 }
 
-model Order {
-  id         String   @id @default(cuid())
+model Orders {
+  id         String     @id @default(cuid())
   detail     String
   payment    Int
   status     String
   total      Int
-  services   Services @relation(fields: [servicesId], references: [id])
-  servicesId String
-  users      Users    @relation(fields: [usersId], references: [id])
-  usersId    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  service    Services   @relation(fields: [serviceId], references: [id])
+  serviceId  String
+  user       Users      @relation(fields: [userId], references: [id])
+  userId     String
+  facility   Facilities @relation(fields: [facilityId], references: [id])
+  facilityId String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
 
 model Services {
-  id    String  @id @default(cuid())
+  id    String   @id @default(cuid())
   type  String
-  Order Order[]
+  Order Orders[]
+}
+
+model Facilities {
+  id           String      @id @default(cuid())
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  phone        String
+  address      String[]
+  Orders       Orders[]
+  Products     Products[]
 }
 
 model Products {
-  id           String      @id @default(cuid())
-  productName  String
-  price        Int
-  category     String
-  subcategory  String
-  description  String
-  image        String
-  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
-  restaurantId String
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id          String     @id @default(cuid())
+  productName String
+  price       Int
+  category    String
+  subcategory String
+  description String
+  image       String
+  facility    Facilities @relation(fields: [facilityId], references: [id])
+  facilityId  String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model Restaurants {
@@ -74,34 +86,29 @@ model Restaurants {
   address      String[]
   about        String
   location     String[]
-  reviews      Review[]
-  Products     Products[]
-  Gallery      Gallery[]
+  reviews      Reviews[]
+  Gallery      Galleries[]
   Facilities   Facilities[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
-model Gallery {
+model Galleries {
   id           String      @id @default(cuid())
   restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
   restaurantId String
   ImageUrl     String
 }
 
-model Facilities {
+model Reviews {
   id           String      @id @default(cuid())
-  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  title        String
+  rating       Int
+  message      String
+  user         Users       @relation(fields: [userId], references: [id])
+  userId       String
+  Restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
   restaurantId String
-  phone        String
-  address      String[]
-}
-
-model Review {
-  id            String       @id @default(cuid())
-  title         String
-  rating        Int
-  comment       String
-  user          Users        @relation(fields: [userId], references: [id])
-  userId        String
-  Restaurants   Restaurants? @relation(fields: [restaurantsId], references: [id])
-  restaurantsId String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }

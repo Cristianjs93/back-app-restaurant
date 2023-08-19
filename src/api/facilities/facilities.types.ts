@@ -1,3 +1,3 @@
-import { Facilities as FacilitiesModel } from "@prisma/client";
+import { Facilities as FacilitiesModel } from '@prisma/client';
 
 export type Facilities = FacilitiesModel;
