@@ -34,3 +34,24 @@ export async function createFacility(input: Facilities) {
 
    return facility;
 }
+
+export async function updateFacility(data: Facilities) {
+   const facility = await prisma.facilities.update({
+      where: {
+         id: data.id
+      },
+      data
+   });
+
+   return facility;
+}
+
+export async function deleteFacility(id: string) {
+   const facility = await prisma.facilities.delete({
+      where: {
+         id
+      }
+   });
+
+   return facility;
+}
