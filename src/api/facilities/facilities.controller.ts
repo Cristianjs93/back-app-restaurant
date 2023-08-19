@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthRequestFacilities } from '../../auth/auth.types.ts';
+import ErrorHandler from '../../utils/errorsHandlers.ts';
 import {
   getAllFacilities,
   getFacilityById,
@@ -12,14 +13,8 @@ export async function getAllFacilitiesHandler(req: Request, res: Response) {
   try {
     const facilities = await getAllFacilities();
     return res.status(200).json(facilities);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -33,14 +28,8 @@ export async function getFacilityByIdHandler(req: Request, res: Response) {
       });
     }
     return res.status(200).json(facility);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -49,14 +38,8 @@ export async function createFacilityHandler(req: Request, res: Response) {
     const data = req.body;
     const facility = await createFacility(data);
     return res.status(201).json(facility);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -71,14 +54,8 @@ export async function updateFacilityHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(facility);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -99,13 +76,7 @@ export async function deleteFacilityHandler(
     return await deleteFacility(id);
 
     res.status(200).json(facility);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthRequestRestaurants } from '../../auth/auth.types.ts';
+import ErrorHandler from '../../utils/errorsHandlers.ts';
 import {
   getAllRestaurants,
   getRestaurantById,
@@ -12,14 +13,8 @@ export async function getAllRestaurantsHandler(req: Request, res: Response) {
   try {
     const restaurants = await getAllRestaurants();
     return res.status(200).json(restaurants);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -35,14 +30,8 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(restaurant);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -53,14 +42,8 @@ export async function createRestaurantHandler(req: Request, res: Response) {
     const restaurant = await createRestaurant(data);
 
     return res.status(201).json(restaurant);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -77,14 +60,8 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(restaurant);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -103,13 +80,7 @@ export async function deleteRestaurantHandler(
     }
 
     return await deleteRestaurant(id);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }

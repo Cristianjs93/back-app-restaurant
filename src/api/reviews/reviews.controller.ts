@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthRequestReviews } from '../../auth/auth.types.ts';
+import ErrorHandler from '../../utils/errorsHandlers.ts';
 import {
   getAllReviews,
   getReviewById,
@@ -12,14 +13,8 @@ export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
     return res.status(200).json(reviews);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -35,14 +30,8 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -51,14 +40,8 @@ export async function createReviewHandler(req: Request, res: Response) {
     const data = req.body;
     const review = await createReview(data);
     return res.status(201).json(review);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -73,14 +56,8 @@ export async function updateReviewHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
 
@@ -99,13 +76,7 @@ export async function deleteReviewHandler(
     }
 
     return await deleteReview(id);
-  } catch (e: unknown) {
-    let message;
-    if (typeof e === 'string') {
-      message = e.toUpperCase();
-    } else if (e instanceof Error) {
-      message = e.message;
-    }
-    return res.status(400).send(message);
+  } catch (e) {
+    return res.status(400).send(ErrorHandler);
   }
 }
