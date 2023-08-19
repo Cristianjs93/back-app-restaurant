@@ -22,3 +22,15 @@ export async function getFacilityById(id: string) {
    });
    return facility;
 }
+
+export async function createFacility(input: Facilities) {
+   const data = {
+      ...input
+   };
+
+   const facility = await prisma.facilities.create({
+      data
+   });
+
+   return facility;
+}
