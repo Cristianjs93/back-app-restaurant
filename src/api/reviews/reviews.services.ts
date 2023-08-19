@@ -17,6 +17,16 @@ export async function getAllReviews() {
    return reviews;
 }
 
+export async function getReviewById(id: string) {
+   const review = await prisma.review.findUnique({
+      where: {
+         id
+      }
+   });
+
+   return review;
+}
+
 export async function createReview(input: Reviews) {
    const data = {
       ...input
