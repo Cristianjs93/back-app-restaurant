@@ -16,3 +16,20 @@ export async function getAllReviews() {
    });
    return reviews;
 }
+
+export async function createReview(input: Reviews) {
+   const data = {
+      ...input
+   };
+   const review = await prisma.review.create({ data });
+
+   return review;
+}
+
+// export async function updateReview(){
+//     const review = await prisma.review.update({
+//         where:{
+//             id
+//         }
+//     })
+// }
