@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { Users } from "../api/users/user.types";
 import { Restaurants } from "../api/restaurants/restaurants.types";
+import { Reviews } from "../api/reviews/reviews.types";
 
 export type PayloadType = {
    id: string;
@@ -15,4 +16,8 @@ export interface AuthRequest extends Request {
 
 export interface AuthRequestRestaurants extends Request {
    restaurants?: Restaurants;
+}
+
+export interface AuthRequestReviews extends Request {
+   reviews?: Reviews;
 }

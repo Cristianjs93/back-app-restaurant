@@ -6,7 +6,7 @@ import {
    createUserHandler,
    updateUserHandler,
    deleteUserHandler
-} from "./user.controller.ts";
+} from "./user.controller";
 
 // import { isAuthenticated } from '../../auth/auth.controller';
 // import { hasRole } from '../../auth/auth.controller';

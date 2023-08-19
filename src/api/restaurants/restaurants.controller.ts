@@ -54,7 +54,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
       const restaurant = await updateRestaurant(data);
 
       if (!restaurant) {
-         return res.status(404).json({
+         res.status(404).json({
             message: "User not found"
          });
       }
