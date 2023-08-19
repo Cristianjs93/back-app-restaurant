@@ -26,10 +26,12 @@ export async function createReview(input: Reviews) {
    return review;
 }
 
-// export async function updateReview(){
-//     const review = await prisma.review.update({
-//         where:{
-//             id
-//         }
-//     })
-// }
+export async function updateReview(data: Reviews) {
+   const review = await prisma.review.update({
+      where: {
+         id: data.id
+      },
+      data
+   });
+   return review;
+}

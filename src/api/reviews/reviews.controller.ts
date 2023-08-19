@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { Reviews } from "./reviews.types";
 import { AuthRequestReviews } from "../../auth/auth.types";
-import {
-   getAllReviews,
-   createReview
-   // updateReview
-} from "./reviews.services";
+import { getAllReviews, createReview, updateReview } from "./reviews.services";
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
    try {
@@ -26,17 +22,18 @@ export async function createReviewHandler(req: Request, res: Response) {
    }
 }
 
-// export async function updateReviewHandler(req: Request, res: Response) {
-//    try {
-//       const data = req.body;
+export async function updateReviewHandler(req: Request, res: Response) {
+   try {
+      const data = req.body;
 
-//       const review = await updateReview(data);
+      const review = await updateReview(data);
 
-//       if (!review) {
-//          res.status(404).json({ message: "Review not found" });
-//       }
-//       res.status(200).json(review);
-//    } catch ({ message }: any) {
-//       res.status(400).json({ message });
-//    }
-// }
+      if (!review) {
+         res.status(404).json({ message: "Review not found" });
+      }
+
+      res.status(200).json(review);
+   } catch ({ message }: any) {
+      res.status(400).json({ message });
+   }
+}
