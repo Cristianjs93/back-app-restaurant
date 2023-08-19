@@ -24,7 +24,7 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
       const restaurant = await getRestaurantById(id);
 
       if (!restaurant) {
-         return res.status(404).json({
+         res.status(404).json({
             message: "Restaurant not found"
          });
       }
