@@ -5,7 +5,8 @@ import {
    getAllReviews,
    getReviewById,
    createReview,
-   updateReview
+   updateReview,
+   deleteReview
 } from "./reviews.services";
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
@@ -53,6 +54,28 @@ export async function updateReviewHandler(req: Request, res: Response) {
       if (!review) {
          res.status(404).json({ message: "Review not found" });
       }
+
+      res.status(200).json(review);
+   } catch ({ message }: any) {
+      res.status(400).json({ message });
+   }
+}
+
+export async function deleteReviewHandler(
+   req: AuthRequestReviews,
+   res: Response
+) {
+   try {
+      const { id } = req.body;
+      const review = await getReviewById(id);
+
+      if (!review) {
+         return res.status(404).json({
+            message: "User not found"
+         });
+      }
+
+      await deleteReview(id);
 
       res.status(200).json(review);
    } catch ({ message }: any) {

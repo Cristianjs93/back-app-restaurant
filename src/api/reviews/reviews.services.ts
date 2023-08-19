@@ -45,3 +45,13 @@ export async function updateReview(data: Reviews) {
    });
    return review;
 }
+
+export async function deleteReview(id: string) {
+   const restaurant = await prisma.review.delete({
+      where: {
+         id
+      }
+   });
+
+   return restaurant;
+}
