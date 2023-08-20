@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { hashPasswordSync } from '../auth/utils/bycript';
 import { rolesSeeder } from '../api/roles/roles.seeder';
 
-const [admin, client] = rolesSeeder;
+const [_, client] = rolesSeeder;
 
 export const fakerUsers = Array.from({ length: 10 }).map(() => ({
   id: faker.string.uuid(),
