@@ -1,5 +1,5 @@
 class ErrorHandler {
-  constructor(private exception: any) {
+  constructor(private exception: unknown) {
     if (typeof exception === 'string') throw exception;
     if (exception instanceof Error) throw exception.message;
 
