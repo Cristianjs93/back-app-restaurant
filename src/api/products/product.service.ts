@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { Products } from './checkout.types'
+import { Products } from './product.types'
 
 const prisma = new PrismaClient()
 

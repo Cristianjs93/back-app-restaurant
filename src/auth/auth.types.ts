@@ -4,7 +4,7 @@ import { Restaurants } from '../api/restaurants/restaurants.types.ts';
 import { Facilities } from '../api/facilities/facilities.types.ts';
 import { Reviews } from '../api/reviews/reviews.types.ts';
 import { Orders } from '../api/orders/orders.types.ts';
-import { Products } from '../api/products/checkout.types.ts';
+import { Products } from '../api/products/product.types.ts';
 
 export type PayloadType = {
    id: string;

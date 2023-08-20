@@ -8,7 +8,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct
-} from './checkout.service'
+} from './product.service'
 
 export async function getAllProductsHandler(req: Request, res: Response) {
   try {
