@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client'
-import { Products } from './product.types'
+import { PrismaClient } from '@prisma/client';
+import { Products } from './product.types';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export async function getAllProducts() {
   const products = await prisma.products.findMany({
@@ -12,8 +12,8 @@ export async function getAllProducts() {
       description: true,
       image: true
     }
-  })
-  return products
+  });
+  return products;
 }
 
 export async function getProductById(id: string) {
@@ -21,19 +21,19 @@ export async function getProductById(id: string) {
     where: {
       id
     }
-  })
-  return products
+  });
+  return products;
 }
 
 export async function createProduct(input: Products) {
   const data = {
     ...input
-  }
+  };
 
   const product = await prisma.products.create({
     data
-  })
-  return product
+  });
+  return product;
 }
 
 export async function updateProduct(data: Products) {
@@ -42,7 +42,7 @@ export async function updateProduct(data: Products) {
       id: data.id,
     },
     data
-  })
+  });
   return products
 }
 
@@ -51,6 +51,6 @@ export async function deleteProduct(id: string) {
     where: {
       id
     }
-  })
-  return product
+  });
+  return product;
 }
