@@ -60,7 +60,7 @@ export async function updateFacilityHandler(req: Request, res: Response) {
 
 export async function deleteFacilityHandler(
   req: AuthRequestFacilities,
-  res: Response,
+  res: Response
 ) {
   try {
     const { id } = req.body;

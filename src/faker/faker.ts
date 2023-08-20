@@ -1,6 +1,8 @@
-import { faker } from "@faker-js/faker";
-import { hashPasswordSync } from "../auth/utils/bycript";
-import { rolesSeeder } from "../api/roles/roles.seeder";
+import { faker } from '@faker-js/faker';
+import { hashPasswordSync } from '../auth/utils/bycript';
+import { rolesSeeder } from '../api/roles/roles.seeder';
+
+const [admin, client] = rolesSeeder;
 
 export const fakerUsers = Array.from({ length: 10 }).map(() => ({
   id: faker.string.uuid(),
@@ -12,7 +14,7 @@ export const fakerUsers = Array.from({ length: 10 }).map(() => ({
   age: faker.number.int({ max: 100 }),
   password: hashPasswordSync(faker.internet.password()),
   isActive: true,
-  roleId: rolesSeeder[2].id,
+  roleId: client.id,
 }));
 
 export const fakerRestaurants = Array.from({ length: 20 }).map(() => ({

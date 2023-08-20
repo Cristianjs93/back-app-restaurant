@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { Reviews } from "./reviews.types.ts";
+import { PrismaClient } from '@prisma/client';
+import { Reviews } from './reviews.types.ts';
 
 const prisma = new PrismaClient();
 

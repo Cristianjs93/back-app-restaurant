@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import { hashPassword } from "../../auth/utils/bycript.ts";
-import { Users } from "./user.types.ts";
+import { hashPassword } from '../../auth/utils/bycript.ts';
+import { Users } from './user.types.ts';
 
 const prisma = new PrismaClient();
 
@@ -15,7 +15,6 @@ export async function createUser(input: Users) {
 
   const data = {
     ...input,
-    // password: hashedPassword,
   };
 
   const user = await prisma.users.create({

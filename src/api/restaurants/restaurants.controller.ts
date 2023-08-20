@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
-import { AuthRequestRestaurants } from "../../auth/auth.types.ts";
+import { Request, Response } from 'express';
+import { AuthRequestRestaurants } from '../../auth/auth.types.ts';
 import {
   getAllRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
-} from "./restaurants.services.ts";
+} from './restaurants.services.ts';
 
 export async function getAllRestaurantsHandler(req: Request, res: Response) {
   try {
@@ -24,7 +24,7 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
 
     if (!restaurant) {
       return res.status(404).json({
-        message: "Restaurant not found",
+        message: 'Restaurant not found',
       });
     }
 
@@ -54,7 +54,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
 
     if (!restaurant) {
       return res.status(404).json({
-        message: "User not found",
+        message: 'User not found',
       });
     }
 
@@ -66,7 +66,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
 
 export async function deleteRestaurantHandler(
   req: AuthRequestRestaurants,
-  res: Response,
+  res: Response
 ) {
   try {
     const { id } = req.body;
@@ -74,7 +74,7 @@ export async function deleteRestaurantHandler(
 
     if (!restaurant) {
       return res.status(404).json({
-        message: "User not found",
+        message: 'User not found',
       });
     }
 
