@@ -3,7 +3,7 @@ import { rolesSeeder } from '../roles/roles.seeder';
 import { hashPasswordSync } from '../../auth/utils/bycript';
 import { fakerUsers } from '../../faker/faker';
 
-const [admin] = rolesSeeder;
+const [admin, _] = rolesSeeder;
 
 export const usersSeeder: UsersSeeders[] = [
   {
