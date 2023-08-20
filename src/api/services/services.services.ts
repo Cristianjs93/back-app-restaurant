@@ -11,3 +11,13 @@ export async function getAllServices() {
    });
    return services;
 }
+
+export async function getServiceById(id: string) {
+   const service = await primsa.services.findUnique({
+      where: {
+         id,
+      },
+   });
+
+   return service;
+}
