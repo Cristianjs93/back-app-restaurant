@@ -1,4 +1,6 @@
-export const restaurantsSeeder = [
+import { RestaurantsSeeder } from "./restaurants.types";
+
+export const restaurantsSeeder: RestaurantsSeeder[] = [
   {
     id: "cllim4uqk0001wrwk5xsa9ff0",
     nit: "900203",

@@ -1,6 +1,8 @@
-import { hashPasswordSync } from "../../auth/utils/bycript";
+import { UsersSeeders } from "./user.types";
 import { rolesSeeder } from "../roles/roles.seeder";
-export const usersSeeder = [
+import { hashPasswordSync } from "../../auth/utils/bycript";
+
+export const usersSeeder: UsersSeeders[] = [
   {
     id: "cllimozdc0001wr3swh067x93",
     firstname: "cristian",
@@ -10,6 +12,7 @@ export const usersSeeder = [
     email: "cj@test.com",
     age: 29,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[0].id,
   },
   {
@@ -21,6 +24,7 @@ export const usersSeeder = [
     email: "rb@test.com",
     age: 22,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[0].id,
   },
   {
@@ -32,6 +36,7 @@ export const usersSeeder = [
     email: "jb@test.com",
     age: 30,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[0].id,
   },
   {
@@ -43,6 +48,7 @@ export const usersSeeder = [
     email: "jd@test.com",
     age: 30,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[2].id,
   },
   {
@@ -54,6 +60,7 @@ export const usersSeeder = [
     email: "jjd@test.com",
     age: 35,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[2].id,
   },
   {
@@ -65,6 +72,7 @@ export const usersSeeder = [
     email: "jdd@test.com",
     age: 25,
     password: hashPasswordSync("1234"),
+    isActive: true,
     roleId: rolesSeeder[2].id,
   },
 ];

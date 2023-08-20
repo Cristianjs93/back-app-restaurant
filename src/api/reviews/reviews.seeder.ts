@@ -1,7 +1,8 @@
+import { ReviewsSeeder } from "./reviews.types";
 import { usersSeeder } from "../users/users.seeder";
 import { restaurantsSeeder } from "../restaurants/restaurants.seeder";
 
-export const reviewsSeeder = [
+export const reviewsSeeder: ReviewsSeeder[] = [
   {
     id: "cllimfndy0001wrtocfq3m45u",
     userId: usersSeeder[3].id,
@@ -10,6 +11,7 @@ export const reviewsSeeder = [
     rating: 5,
     message: "best pizza in town",
   },
+
   {
     id: "cllimfndy0002wrtocfq3m45u",
     userId: usersSeeder[4].id,
