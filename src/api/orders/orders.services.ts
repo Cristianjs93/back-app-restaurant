@@ -49,3 +49,11 @@ export async function updateOrder(data: Orders) {
    });
    return order;
 }
+
+export async function deleteOrder(id: string) {
+   const order = await prisma.orders.delete({
+      where: {
+         id,
+      },
+   });
+}

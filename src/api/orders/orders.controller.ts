@@ -7,6 +7,7 @@ import {
    getOrderById,
    createOrder,
    updateOrder,
+   deleteOrder,
 } from './orders.services';
 
 export async function getAllOrdersHandler(req: Request, res: Response) {
@@ -62,5 +63,26 @@ export async function updateOrderHandler(req: Request, res: Response) {
    } catch (exception: unknown) {
       const message = errorHandler(exception);
       res.status(400).json({ message });
+   }
+}
+
+export async function deleteOrderHandler(
+   req: AuthRequestOrders,
+   res: Response
+) {
+   try {
+      const { id } = req.body;
+      const order = await getOrderById(id);
+
+      if (!order) {
+         return res.status(404).json('Order not found');
+      }
+
+      await deleteOrder(id);
+
+      return res.status(200).json('Order deleted succesfully');
+   } catch (exception: unknown) {
+      const message = errorHandler(exception);
+      return res.status(400).json({ message });
    }
 }
