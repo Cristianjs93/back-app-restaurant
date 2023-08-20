@@ -29,5 +29,6 @@ module.exports = {
   rules: {
     'arrow-body-style': ['error', 'always'],
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-nested-ternary': 'off',
   },
 };
