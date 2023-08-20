@@ -4,6 +4,7 @@ import { Restaurants } from '../api/restaurants/restaurants.types.ts';
 import { Facilities } from '../api/facilities/facilities.types.ts';
 import { Reviews } from '../api/reviews/reviews.types.ts';
 import { Services } from '../api/services/services.types.ts';
+import { Orders } from '../api/orders/orders.types.ts';
 
 export type PayloadType = {
    id: string;
@@ -29,4 +30,8 @@ export interface AuthRequestReviews extends Request {
 
 export interface AuthRequestServices extends Request {
    services?: Services;
+}
+
+export interface AuthRequestOrders extends Request {
+   orders?: Orders;
 }
