@@ -2,7 +2,12 @@ import { Request, Response } from 'express';
 import { AuthRequestOrders } from '../../auth/auth.types.ts';
 import errorHandler from '../../utils/errorHandler.ts';
 
-import { getAllOrders, getOrderById, createOrder } from './orders.services';
+import {
+   getAllOrders,
+   getOrderById,
+   createOrder,
+   updateOrder,
+} from './orders.services';
 
 export async function getAllOrdersHandler(req: Request, res: Response) {
    try {
@@ -41,5 +46,21 @@ export async function createOrderHandler(req: Request, res: Response) {
       const message = errorHandler(exception);
 
       return res.status(400).json({ message });
+   }
+}
+
+export async function updateOrderHandler(req: Request, res: Response) {
+   try {
+      const data = req.body;
+      const order = await updateOrder(data);
+
+      if (!order) {
+         return res.status(404).json('Order not found');
+      }
+
+      return res.status(200).json(order);
+   } catch (exception: unknown) {
+      const message = errorHandler(exception);
+      res.status(400).json({ message });
    }
 }

@@ -39,3 +39,13 @@ export async function createOrder(input: Orders) {
 
    return order;
 }
+
+export async function updateOrder(data: Orders) {
+   const order = await prisma.orders.update({
+      where: {
+         id: data.id,
+      },
+      data,
+   });
+   return order;
+}
