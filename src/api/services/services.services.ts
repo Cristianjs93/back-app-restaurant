@@ -33,3 +33,21 @@ export async function createService(input: Services) {
 
    return service;
 }
+export async function updateService(data: Services) {
+   const service = await primsa.services.update({
+      where: {
+         id: data.id,
+      },
+      data,
+   });
+   return service;
+}
+
+export async function deleteService(id: string) {
+   const service = await primsa.services.delete({
+      where: {
+         id,
+      },
+   });
+   return service;
+}
