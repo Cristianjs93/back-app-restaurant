@@ -1,4 +1,5 @@
 import { hashPasswordSync } from "../../auth/utils/bycript";
+import { rolesSeeder } from "../roles/roles.seeder";
 export const usersSeeder = [
   {
     id: "cllimozdc0001wr3swh067x93",
@@ -9,7 +10,7 @@ export const usersSeeder = [
     email: "cj@test.com",
     age: 29,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0001wrwkmd6zb8um",
+    roleId: rolesSeeder[0].id,
   },
   {
     id: "cllimozdc0002wr3swh067x93",
@@ -20,7 +21,7 @@ export const usersSeeder = [
     email: "rb@test.com",
     age: 22,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0001wrwkmd6zb8um",
+    roleId: rolesSeeder[0].id,
   },
   {
     id: "cllimozdc0003wr3swh067x93",
@@ -31,7 +32,7 @@ export const usersSeeder = [
     email: "jb@test.com",
     age: 30,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0001wrwkmd6zb8um",
+    roleId: rolesSeeder[0].id,
   },
   {
     id: "cllimozdc0004wr3swh067x93",
@@ -42,7 +43,7 @@ export const usersSeeder = [
     email: "jd@test.com",
     age: 30,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0003wrwk6fm5ym43",
+    roleId: rolesSeeder[2].id,
   },
   {
     id: "cllimozdc0005wr3swh067x93",
@@ -53,7 +54,7 @@ export const usersSeeder = [
     email: "jjd@test.com",
     age: 35,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0003wrwk6fm5ym43",
+    roleId: rolesSeeder[2].id,
   },
   {
     id: "cllimozdc0006wr3swh067x93",
@@ -64,6 +65,6 @@ export const usersSeeder = [
     email: "jdd@test.com",
     age: 25,
     password: hashPasswordSync("1234"),
-    roleId: "cllim4uqr0003wrwk6fm5ym43",
+    roleId: rolesSeeder[2].id,
   },
 ];
