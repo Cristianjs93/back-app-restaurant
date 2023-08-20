@@ -56,7 +56,7 @@ export async function updateOrderHandler(req: Request, res: Response) {
       const order = await updateOrder(data);
 
       if (!order) {
-         return res.status(404).json('Order not found');
+         return res.status(404).json({ message: 'Order not found' });
       }
 
       return res.status(200).json(order);
@@ -75,12 +75,12 @@ export async function deleteOrderHandler(
       const order = await getOrderById(id);
 
       if (!order) {
-         return res.status(404).json('Order not found');
+         return res.status(404).json({ message: 'Order not found' });
       }
 
       await deleteOrder(id);
 
-      return res.status(200).json('Order deleted succesfully');
+      return res.status(200).json({ message: 'Order deleted succesfully' });
    } catch (exception: unknown) {
       const message = errorHandler(exception);
       return res.status(400).json({ message });
