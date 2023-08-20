@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthRequestReviews } from '../../auth/auth.types.ts';
+import errorHandler from '../../utils/errorHandler.ts';
 import {
   getAllReviews,
   getReviewById,
@@ -12,8 +13,9 @@ export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
     return res.status(200).json(reviews);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -29,8 +31,9 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -39,8 +42,9 @@ export async function createReviewHandler(req: Request, res: Response) {
     const data = req.body;
     const review = await createReview(data);
     return res.status(201).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -55,8 +59,9 @@ export async function updateReviewHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(review);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -75,7 +80,8 @@ export async function deleteReviewHandler(
     }
 
     return await deleteReview(id);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }

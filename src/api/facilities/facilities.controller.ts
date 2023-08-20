@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthRequestFacilities } from '../../auth/auth.types.ts';
+import errorHandler from '../../utils/errorHandler.ts';
 import {
   getAllFacilities,
   getFacilityById,
@@ -12,8 +13,9 @@ export async function getAllFacilitiesHandler(req: Request, res: Response) {
   try {
     const facilities = await getAllFacilities();
     return res.status(200).json(facilities);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -27,8 +29,9 @@ export async function getFacilityByIdHandler(req: Request, res: Response) {
       });
     }
     return res.status(200).json(facility);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -37,8 +40,9 @@ export async function createFacilityHandler(req: Request, res: Response) {
     const data = req.body;
     const facility = await createFacility(data);
     return res.status(201).json(facility);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -53,8 +57,9 @@ export async function updateFacilityHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(facility);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -75,7 +80,8 @@ export async function deleteFacilityHandler(
     return await deleteFacility(id);
 
     res.status(200).json(facility);
-  } catch ({ message }: any) {
-    return res.status(400).json({ message });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }

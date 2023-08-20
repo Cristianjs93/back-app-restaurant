@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { getUserByEmail } from '../../api/users/user.services.ts';
 import { comparePassword } from '../utils/bycript.ts';
 import { signToken } from '../auth.services.ts';
+import errorHandler from '../../utils/errorHandler.ts';
 
 async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
@@ -33,9 +34,10 @@ async function loginHandler(req: Request, res: Response) {
       role: user.roleId,
     };
 
-    return res.status(200).json({ token, newUser });
-  } catch (error: any) {
-    return res.status(400).send({ message: error.message });
+    return res.status(200).send({ token, newUser });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
