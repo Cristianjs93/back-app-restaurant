@@ -18,14 +18,14 @@ export interface AuthRequest extends Request {
 }
 
 export interface AuthRequestRestaurants extends Request {
-   restaurants?: Restaurants;
+  restaurants?: Restaurants;
 }
 
 export interface AuthRequestFacilities extends Request {
-   facilities?: Facilities;
+  facilities?: Facilities;
 }
 export interface AuthRequestReviews extends Request {
-   reviews?: Reviews;
+  reviews?: Reviews;
 }
 
 export interface AuthRequestServices extends Request {

@@ -15,7 +15,6 @@ export async function createUser(input: Users) {
 
   const data = {
     ...input,
-    password: hashedPassword,
   };
 
   const user = await prisma.users.create({

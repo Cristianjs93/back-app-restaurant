@@ -71,7 +71,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
 
 export async function deleteRestaurantHandler(
   req: AuthRequestRestaurants,
-  res: Response,
+  res: Response
 ) {
   try {
     const { id } = req.body;
@@ -83,7 +83,7 @@ export async function deleteRestaurantHandler(
       });
     }
 
-    return await deleteRestaurant(id);
+    await deleteRestaurant(id);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
