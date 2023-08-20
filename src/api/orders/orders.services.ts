@@ -18,3 +18,12 @@ export async function getAllOrders() {
    });
    return orders;
 }
+
+export async function getOrderById(id: string) {
+   const order = await prisma.orders.findUnique({
+      where: {
+         id,
+      },
+   });
+   return order;
+}

@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getAllOrdersHandler } from './orders.controller';
+import { getAllOrdersHandler, getOrderByIdHandler } from './orders.controller';
 
 const router = Router();
 
 router.get('/', getAllOrdersHandler);
+router.get('/:id', getOrderByIdHandler);
 
 export default router;
