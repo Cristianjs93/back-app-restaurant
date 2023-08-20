@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Users } from './user.types.ts';
 import { AuthRequest } from '../../auth/auth.types.ts';
-import ErrorHandler from '../../utils/errorsHandlers.ts';
+import errorHandler from '../../utils/errorHandler.ts';
 
 import {
   getAllUsers,
@@ -16,8 +16,9 @@ export async function getAllUsersHandler(req: Request, res: Response) {
   try {
     const users = await getAllUsers();
     return res.status(200).send(users);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -34,8 +35,9 @@ export async function getUserByIdHandler(req: AuthRequest, res: Response) {
     }
 
     return res.status(200).send(user);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -52,8 +54,9 @@ export async function getUserByEmailHandler(req: AuthRequest, res: Response) {
     }
 
     return res.status(200).json(user);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -64,8 +67,9 @@ export async function createUserHandler(req: Request, res: Response) {
     const user = await createUser(data);
 
     return res.status(201).json(user);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -82,8 +86,9 @@ export async function updateUserHandler(req: Request, res: Response) {
     }
 
     return res.status(200).json(user);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
 
@@ -99,7 +104,8 @@ export async function deleteUserHandler(req: AuthRequest, res: Response) {
     }
 
     return await deleteUser(id);
-  } catch (e) {
-    return res.status(400).send(ErrorHandler);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
