@@ -21,3 +21,15 @@ export async function getServiceById(id: string) {
 
    return service;
 }
+
+export async function createService(input: Services) {
+   const data = {
+      ...input,
+   };
+
+   const service = await primsa.services.create({
+      data,
+   });
+
+   return service;
+}
