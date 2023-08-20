@@ -1,4 +1,5 @@
 import { RestaurantsSeeder } from "./restaurants.types";
+import { fakerRestaurants } from "../../faker/faker";
 
 export const restaurantsSeeder: RestaurantsSeeder[] = [
   {
@@ -41,4 +42,5 @@ export const restaurantsSeeder: RestaurantsSeeder[] = [
     about: "best mediterranean food",
     location: ["53", "02"],
   },
+  ...fakerRestaurants,
 ];

@@ -1,6 +1,7 @@
 import { UsersSeeders } from "./user.types";
 import { rolesSeeder } from "../roles/roles.seeder";
 import { hashPasswordSync } from "../../auth/utils/bycript";
+import { fakerUsers } from "../../faker/faker";
 
 export const usersSeeder: UsersSeeders[] = [
   {
@@ -75,4 +76,5 @@ export const usersSeeder: UsersSeeders[] = [
     isActive: true,
     roleId: rolesSeeder[2].id,
   },
+  ...fakerUsers,
 ];
