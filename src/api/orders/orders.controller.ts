@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { AuthRequestOrders } from '../../auth/auth.types.ts';
 import errorHandler from '../../utils/errorHandler.ts';
 
-import { getAllOrders, getOrderById } from './orders.services';
+import { getAllOrders, getOrderById, createOrder } from './orders.services';
 
 export async function getAllOrdersHandler(req: Request, res: Response) {
    try {
@@ -27,5 +27,19 @@ export async function getOrderByIdHandler(req: Request, res: Response) {
    } catch (exception: unknown) {
       const message = errorHandler(exception);
       return res.status(400).send({ message });
+   }
+}
+
+export async function createOrderHandler(req: Request, res: Response) {
+   try {
+      const data = req.body;
+
+      const order = await createOrder(data);
+
+      return res.status(201).json(order);
+   } catch (exception: unknown) {
+      const message = errorHandler(exception);
+
+      return res.status(400).json({ message });
    }
 }

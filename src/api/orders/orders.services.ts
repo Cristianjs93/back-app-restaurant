@@ -27,3 +27,15 @@ export async function getOrderById(id: string) {
    });
    return order;
 }
+
+export async function createOrder(input: Orders) {
+   const data = {
+      ...input,
+   };
+
+   const order = await prisma.orders.create({
+      data,
+   });
+
+   return order;
+}
