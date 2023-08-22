@@ -7,6 +7,7 @@ import ServicesRouter from './api/services/index.ts';
 import OrdersRouter from './api/orders/index.ts';
 import authLocalRouter from './auth/local/index.ts';
 import userRouter from './api/users/index.ts';
+import ProductsRouter from './api/products/index.ts';
 
 const routes = (app: Application) => {
    app.use('/api/healthcheck', healthcheckRouter);
@@ -17,6 +18,7 @@ const routes = (app: Application) => {
    app.use('/api/orders', OrdersRouter);
    app.use('/auth/local', authLocalRouter);
    app.use('/createUser', userRouter);
+   app.use('/api/products', ProductsRouter);
 };
 
 export default routes;
