@@ -10,5 +10,6 @@
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
   "prettier.useEditorConfig": true,
-  "prettier.tabWidth": 3
+  "prettier.tabWidth": 3,
+  "prettier.trailingComma": "all"
 }

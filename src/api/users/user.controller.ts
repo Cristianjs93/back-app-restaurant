@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { Users } from './user.types.ts';
 import { AuthRequest } from '../../auth/auth.types.ts';
 import errorHandler from '../../utils/errorHandler.ts';
+import { sendNodemailer } from '../../config/nodemailer.ts';
+import { welcomeEmail } from '../../utils/email.ts';
 
 import {
   getAllUsers,
@@ -65,6 +67,7 @@ export async function createUserHandler(req: Request, res: Response) {
     const data = req.body;
 
     const user = await createUser(data);
+    await sendNodemailer(welcomeEmail(user));
 
     return res.status(201).json(user);
   } catch (exception: unknown) {
