@@ -23,6 +23,7 @@ export async function getAllRestaurants() {
       rating: true,
       trending: true,
       reviews: true,
+      createdAt: true,
     },
   });
   return restaurants;
