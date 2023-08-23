@@ -71,7 +71,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
 
 export async function deleteRestaurantHandler(
   req: AuthRequestRestaurants,
-  res: Response
+  res: Response,
 ) {
   try {
     const { id } = req.body;
@@ -79,11 +79,13 @@ export async function deleteRestaurantHandler(
 
     if (!restaurant) {
       return res.status(404).json({
-        message: 'User not found',
+        message: 'Restaurant not found',
       });
     }
 
     await deleteRestaurant(id);
+
+    return res.status(200).json({ message: 'Restaurant deleted succesfully' });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
