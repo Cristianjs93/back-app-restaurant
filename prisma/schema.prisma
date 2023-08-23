@@ -78,19 +78,29 @@ model Products {
 }
 
 model Restaurants {
-  id           String       @id @default(cuid())
-  nit          String
-  businessName String
-  title        String
-  phone        String
-  address      String[]
-  about        String
-  location     String[]
-  reviews      Reviews[]
-  Gallery      Galleries[]
-  Facilities   Facilities[]
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  id                String       @id @default(cuid())
+  nit               String
+  businessName      String
+  title             String
+  phone             String
+  address           String[]
+  about             String
+  latitude          Float
+  longitude         Float
+  image             String
+  cuisines          String[]
+  opening_hour      Int
+  closing_hour      Int
+  opening_first_day String
+  opening_last_day  String
+  cost_two          Int
+  rating            Float
+  trending          Boolean
+  reviews           Reviews[]
+  Gallery           Galleries[]
+  Facilities        Facilities[]
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
 }
 
 model Galleries {
