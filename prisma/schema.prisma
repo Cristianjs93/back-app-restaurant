@@ -96,6 +96,8 @@ model Restaurants {
   cost_two          Int
   rating            Float
   trending          Boolean
+  delivery_time     Int
+  logo              String
   reviews           Reviews[]
   Gallery           Galleries[]
   Facilities        Facilities[]
