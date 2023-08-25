@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function getAllRestaurants() {
   const restaurants = await prisma.restaurants.findMany({
     select: {
-      id: false,
+      id: true,
       title: true,
       phone: true,
       address: true,
@@ -24,6 +24,8 @@ export async function getAllRestaurants() {
       trending: true,
       reviews: true,
       createdAt: true,
+      delivery_time: true,
+      logo: true,
     },
   });
   return restaurants;
