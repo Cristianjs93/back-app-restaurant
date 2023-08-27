@@ -1,16 +1,7 @@
-import { ReviewsSeeder } from './reviews.types';
-import { usersSeeder } from '../users/users.seeder';
-import { restaurantsSeeder } from '../restaurants/restaurants.seeder';
 import { faker } from '@faker-js/faker';
-
-const fakerReviews = Array.from({ length: 20 }).map(() => ({
-  userId: usersSeeder[getRandomNumber(0, usersSeeder.length - 1)].id,
-  restaurantId:
-    restaurantsSeeder[getRandomNumber(0, restaurantsSeeder.length - 1)].id,
-  title: faker.company.catchPhraseNoun(),
-  rating: faker.number.int({ min: 1, max: 5 }),
-  message: faker.company.buzzPhrase(),
-}));
+import { ReviewsSeeder } from './reviews.types.ts';
+import { usersSeeder } from '../users/users.seeder.ts';
+import { restaurantsSeeder } from '../restaurants/restaurants.seeder.ts';
 
 function getRandomNumber(min: number, max: number) {
   const randomDecimal = Math.random();
@@ -19,5 +10,16 @@ function getRandomNumber(min: number, max: number) {
 
   return Math.floor(randomNumberInRange);
 }
+
+const fakerReviews = Array.from({ length: 20 }).map(() => {
+  return {
+    userId: usersSeeder[getRandomNumber(0, usersSeeder.length - 1)].id,
+    restaurantId:
+      restaurantsSeeder[getRandomNumber(0, restaurantsSeeder.length - 1)].id,
+    title: faker.company.catchPhraseNoun(),
+    rating: faker.number.int({ min: 1, max: 5 }),
+    message: faker.company.buzzPhrase(),
+  };
+});
 
 export const reviewsSeeder: ReviewsSeeder[] = [...fakerReviews];

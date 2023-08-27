@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-import { restaurantsSeeder } from "../src/api/restaurants/restaurants.seeder";
-import { rolesSeeder } from "../src/api/roles/roles.seeder";
-import { usersSeeder } from "../src/api/users/users.seeder";
-import { reviewsSeeder } from "../src/api/reviews/reviews.seeder";
+import { PrismaClient } from '@prisma/client';
+import { restaurantsSeeder } from '../src/api/restaurants/restaurants.seeder';
+import { rolesSeeder } from '../src/api/roles/roles.seeder';
+import { usersSeeder } from '../src/api/users/users.seeder';
+import { reviewsSeeder } from '../src/api/reviews/reviews.seeder';
 
 const prisma = new PrismaClient();
 
@@ -30,7 +30,7 @@ async function main() {
 
 main()
   .then(() => {
-    console.log("Seeding complete");
+    console.log('Seeding complete');
   })
   .catch((error) => {
     console.log(error);

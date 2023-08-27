@@ -17,9 +17,11 @@ import {
 export async function getAllUsersHandler(req: Request, res: Response) {
   try {
     const users = await getAllUsers();
+
     return res.status(200).send(users);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
+
     return res.status(400).send({ message });
   }
 }
@@ -105,8 +107,9 @@ export async function deleteUserHandler(req: AuthRequest, res: Response) {
         message: 'User not found',
       });
     }
+    await deleteUser(id);
 
-    return await deleteUser(id);
+    return res.status(200).send(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

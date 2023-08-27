@@ -8,14 +8,14 @@ import { Orders } from '../api/orders/orders.types.ts';
 import { Products } from '../api/products/product.types.ts';
 
 export type PayloadType = {
-   id: string;
-   email: string;
-   iat?: number;
-   exp?: number;
+  id: string;
+  email: string;
+  iat?: number;
+  exp?: number;
 };
 
 export interface AuthRequest extends Request {
-   users?: Users;
+  users?: Users;
 }
 
 export interface AuthRequestRestaurants extends Request {
@@ -30,13 +30,13 @@ export interface AuthRequestReviews extends Request {
 }
 
 export interface AuthRequestServices extends Request {
-   services?: Services;
+  services?: Services;
 }
 
 export interface AuthRequestOrders extends Request {
-   orders?: Orders;
+  orders?: Orders;
 }
 
 export interface AuthRequestProducts extends Request {
-   products?: Products;
+  products?: Products;
 }
