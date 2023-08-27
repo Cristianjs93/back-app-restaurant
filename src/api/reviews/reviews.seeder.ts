@@ -3,7 +3,7 @@ import { usersSeeder } from '../users/users.seeder';
 import { restaurantsSeeder } from '../restaurants/restaurants.seeder';
 import { faker } from '@faker-js/faker';
 
-const fakerReviews = Array.from({ length: 20 }).map(() => ({
+const fakerReviews = Array.from({ length: 100 }).map(() => ({
   userId: usersSeeder[getRandomNumber(0, usersSeeder.length - 1)].id,
   restaurantId:
     restaurantsSeeder[getRandomNumber(0, restaurantsSeeder.length - 1)].id,

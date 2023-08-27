@@ -12,6 +12,7 @@ export async function getAllReviews() {
       title: true,
       rating: true,
       message: true,
+      createdAt: true,
     },
   });
   return reviews;
