@@ -26,6 +26,7 @@ export async function getAllRestaurants() {
       createdAt: true,
       delivery_time: true,
       logo: true,
+      services: true,
     },
   });
   return restaurants;
@@ -35,6 +36,29 @@ export async function getRestaurantById(id: string) {
   const restaurants = await prisma.restaurants.findUnique({
     where: {
       id,
+    },
+    select: {
+      id: true,
+      title: true,
+      phone: true,
+      address: true,
+      about: true,
+      latitude: true,
+      longitude: true,
+      image: true,
+      cuisines: true,
+      opening_hour: true,
+      closing_hour: true,
+      opening_first_day: true,
+      opening_last_day: true,
+      cost_two: true,
+      rating: true,
+      trending: true,
+      reviews: true,
+      createdAt: true,
+      delivery_time: true,
+      logo: true,
+      services: true,
     },
   });
 
