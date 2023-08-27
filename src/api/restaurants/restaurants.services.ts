@@ -26,6 +26,7 @@ export async function getAllRestaurants() {
       createdAt: true,
       delivery_time: true,
       logo: true,
+      services: true,
     },
   });
   return restaurants;

@@ -4,7 +4,7 @@ import { rolesSeeder } from '../api/roles/roles.seeder';
 
 const [_, client] = rolesSeeder;
 
-export const fakerUsers = Array.from({ length: 10 }).map(() => ({
+export const fakerUsers = Array.from({ length: 20 }).map(() => ({
   id: faker.string.uuid(),
   firstname: faker.internet.userName(),
   lastname: faker.internet.userName(),
@@ -17,7 +17,7 @@ export const fakerUsers = Array.from({ length: 10 }).map(() => ({
   roleId: client.id,
 }));
 
-export const fakerRestaurants = Array.from({ length: 20 }).map(() => ({
+export const fakerRestaurants = Array.from({ length: 60 }).map(() => ({
   id: faker.string.uuid(),
   nit: faker.string.numeric({ length: 9 }),
   businessName: faker.company.name(),
@@ -41,4 +41,13 @@ export const fakerRestaurants = Array.from({ length: 20 }).map(() => ({
     min: 211,
     max: 299,
   })}.svg`,
+  services: [
+    'Card Accepted',
+    'Parking Avaliable',
+    'Banquet Area',
+    'Home Delivery',
+    'Table Booking',
+    'Avaliable For Events',
+    'Game Zone',
+  ],
 }));
