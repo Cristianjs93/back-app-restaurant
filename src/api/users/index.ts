@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 router.get('/', getAllUsersHandler);
-router.get('/user', getUserByIdHandler);
+router.get('/:id', getUserByIdHandler);
 router.get('/user', getUserByEmailHandler);
 router.post('/', createUserHandler);
 router.put('/', updateUserHandler);
