@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import {
-   getAllServicesHandler,
-   getServiceByIdHandler,
-   createServiceHandler,
-   updateServiceHandler,
-   deleteServiceHandler,
-} from './services.controllers';
+  getAllServicesHandler,
+  getServiceByIdHandler,
+  createServiceHandler,
+  updateServiceHandler,
+  deleteServiceHandler,
+} from './services.controllers.ts';
 
 const router = Router();
 

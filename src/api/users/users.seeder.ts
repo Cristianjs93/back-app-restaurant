@@ -1,15 +1,15 @@
-import { UsersSeeders } from './user.types';
-import { rolesSeeder } from '../roles/roles.seeder';
-import { hashPasswordSync } from '../../auth/utils/bycript';
-import { fakerUsers } from '../../faker/faker';
+import { UsersSeeders } from './user.types.ts';
+import { rolesSeeder } from '../roles/roles.seeder.ts';
+import { hashPasswordSync } from '../../auth/utils/bycript.ts';
+import { fakerUsers } from '../../faker/faker.ts';
 
-const [admin, _] = rolesSeeder;
+const [admin] = rolesSeeder;
 
 export const usersSeeder: UsersSeeders[] = [
   {
     id: 'cllimozdc0001wr3swh067x93',
-    firstname: 'cristian',
-    lastname: 'jimenez',
+    firstName: 'cristian',
+    lastName: 'jimenez',
     address: 'cra 118b',
     phone: '5234',
     email: 'cj@test.com',
@@ -20,8 +20,8 @@ export const usersSeeder: UsersSeeders[] = [
   },
   {
     id: 'cllimozdc0002wr3swh067x93',
-    firstname: 'rodrigo',
-    lastname: 'bonilla',
+    firstName: 'rodrigo',
+    lastName: 'bonilla',
     address: 'cll 100',
     phone: '9876',
     email: 'rb@test.com',
@@ -32,8 +32,8 @@ export const usersSeeder: UsersSeeders[] = [
   },
   {
     id: 'cllimozdc0003wr3swh067x93',
-    firstname: 'jesus',
-    lastname: 'bravo',
+    firstName: 'jesus',
+    lastName: 'bravo',
     address: 'cll 200',
     phone: '6543',
     email: 'jb@test.com',

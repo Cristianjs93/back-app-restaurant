@@ -1,13 +1,13 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   getAllProductsHandler,
   getProductByIdHandler,
   createProductHandler,
   updateProductHandler,
-  deleteProductHandler
-} from "./product.controller";
+  deleteProductHandler,
+} from './product.controller.ts';
 
-const router = Router()
+const router = Router();
 
 router.get('/', getAllProductsHandler);
 router.get('/:id', getProductByIdHandler);

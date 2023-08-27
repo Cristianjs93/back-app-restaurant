@@ -9,7 +9,7 @@ const createGmailTransporter = () => {
 
   const transporter = nodemailer.createTransport({
     host: hostname,
-    port: port,
+    port,
     secure: true,
     auth: {
       user: username,

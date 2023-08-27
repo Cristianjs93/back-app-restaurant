@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import {
-   getAllOrdersHandler,
-   getOrderByIdHandler,
-   createOrderHandler,
-   updateOrderHandler,
-   deleteOrderHandler,
-} from './orders.controller';
+  getAllOrdersHandler,
+  getOrderByIdHandler,
+  createOrderHandler,
+  updateOrderHandler,
+  deleteOrderHandler,
+} from './orders.controller.ts';
 
 const router = Router();
 

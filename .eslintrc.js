@@ -30,5 +30,9 @@ module.exports = {
     'arrow-body-style': ['error', 'always'],
     '@typescript-eslint/no-explicit-any': 'off',
     'no-nested-ternary': 'off',
+    'import/prefer-default-export': [
+      ('off'),
+      { target: 'single' },
+    ],
   },
 };

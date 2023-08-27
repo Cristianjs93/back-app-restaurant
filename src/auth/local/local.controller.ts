@@ -28,8 +28,8 @@ async function loginHandler(req: Request, res: Response) {
     const token = signToken(payload);
 
     const newUser = {
-      firstName: user.firstname,
-      lastName: user.lastname,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       role: user.roleId,
     };

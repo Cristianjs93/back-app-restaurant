@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import healthcheckController from './healthcheck.controller.ts';
+import { healthcheckHandler } from './healthcheck.controller.ts';
 
 const router = Router();
 
-router.get('/', healthcheckController.healthcheckHandler);
+router.get('/', healthcheckHandler);
 
 export default router;

@@ -67,7 +67,7 @@ export async function updateReviewHandler(req: Request, res: Response) {
 
 export async function deleteReviewHandler(
   req: AuthRequestReviews,
-  res: Response
+  res: Response,
 ) {
   try {
     const { id } = req.body;
