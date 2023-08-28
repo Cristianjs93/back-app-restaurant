@@ -1,26 +1,26 @@
 import { Application } from 'express';
 import healthcheckRouter from './api/healthcheck/index.ts';
-import RestaurantsRouter from './api/restaurants/index.ts';
-import FacilitiesRouter from './api/facilities/index.ts';
-import ReviewsRouter from './api/reviews/index.ts';
-import ServicesRouter from './api/services/index.ts';
-import OrdersRouter from './api/orders/index.ts';
+import restaurantsRouter from './api/restaurants/index.ts';
+import facilitiesRouter from './api/facilities/index.ts';
+import reviewsRouter from './api/reviews/index.ts';
+import servicesRouter from './api/services/index.ts';
+import ordersRouter from './api/orders/index.ts';
 import authLocalRouter from './auth/local/index.ts';
 import userRouter from './api/users/index.ts';
-import ProductsRouter from './api/products/index.ts';
-import RolesRouter from './api/roles/index.ts';
+import productsRouter from './api/products/index.ts';
+import rolesRouter from './api/roles/index.ts';
 
 const routes = (app: Application) => {
   app.use('/api/healthcheck', healthcheckRouter);
-  app.use('/api/restaurants', RestaurantsRouter);
-  app.use('/api/facilities', FacilitiesRouter);
-  app.use('/api/reviews', ReviewsRouter);
-  app.use('/api/services', ServicesRouter);
-  app.use('/api/orders', OrdersRouter);
+  app.use('/api/restaurants', restaurantsRouter);
+  app.use('/api/facilities', facilitiesRouter);
+  app.use('/api/reviews', reviewsRouter);
+  app.use('/api/services', servicesRouter);
+  app.use('/api/orders', ordersRouter);
   app.use('/api/auth/local', authLocalRouter);
   app.use('/api/createUser', userRouter);
-  app.use('/api/products', ProductsRouter);
-  app.use('/api/roles', RolesRouter);
+  app.use('/api/products', productsRouter);
+  app.use('/api/roles', rolesRouter);
 };
 
 export default routes;
