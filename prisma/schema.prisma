@@ -14,7 +14,7 @@ model Users {
   address   String
   phone     String
   email     String    @unique
-  age       Int
+  age       String
   password  String
   isActive  Boolean   @default(false)
   Review    Reviews[]
