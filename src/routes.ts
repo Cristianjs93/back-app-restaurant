@@ -12,7 +12,7 @@ import rolesRouter from './api/roles/index.ts';
 
 const routes = (app: Application) => {
   app.use('/api/healthcheck', healthcheckRouter);
-  app.use('/api/restaurants', restaurantsRouter);
+  app.use('/restaurants', restaurantsRouter);
   app.use('/api/facilities', facilitiesRouter);
   app.use('/api/reviews', reviewsRouter);
   app.use('/api/services', servicesRouter);
