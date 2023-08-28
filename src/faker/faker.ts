@@ -12,7 +12,7 @@ export const fakerUsers = Array.from({ length: 20 }).map(() => {
     address: faker.location.streetAddress(),
     phone: faker.phone.number(),
     email: faker.internet.email(),
-    age: faker.number.int({ max: 100 }),
+    age: faker.string.numeric(),
     password: hashPasswordSync(faker.internet.password()),
     isActive: true,
     roleId: client.id,
