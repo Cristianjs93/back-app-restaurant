@@ -1,8 +1,26 @@
-import { Application } from "express";
-import healthcheckRouter from "./api/healthcheck";
+import { Application } from 'express';
+import healthcheckRouter from './api/healthcheck/index.ts';
+import RestaurantsRouter from './api/restaurants/index.ts';
+import FacilitiesRouter from './api/facilities/index.ts';
+import ReviewsRouter from './api/reviews/index.ts';
+import ServicesRouter from './api/services/index.ts';
+import OrdersRouter from './api/orders/index.ts';
+import authLocalRouter from './auth/local/index.ts';
+import userRouter from './api/users/index.ts';
+import ProductsRouter from './api/products/index.ts';
+import RolesRouter from './api/roles/index.ts';
 
 const routes = (app: Application) => {
-   app.use("/api/healthcheck", healthcheckRouter);
+  app.use('/api/healthcheck', healthcheckRouter);
+  app.use('/api/restaurants', RestaurantsRouter);
+  app.use('/api/facilities', FacilitiesRouter);
+  app.use('/api/reviews', ReviewsRouter);
+  app.use('/api/services', ServicesRouter);
+  app.use('/api/orders', OrdersRouter);
+  app.use('/api/auth/local', authLocalRouter);
+  app.use('/api/createUser', userRouter);
+  app.use('/api/products', ProductsRouter);
+  app.use('/api/roles', RolesRouter);
 };
 
 export default routes;

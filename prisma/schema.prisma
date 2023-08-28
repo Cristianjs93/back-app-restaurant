@@ -8,20 +8,120 @@ datasource db {
 }
 
 model Users {
-  id        String   @id @default(cuid())
-  firstname String
-  lastname  String
+  id        String    @id @default(cuid())
+  firstName String
+  lastName  String
   address   String
   phone     String
-  email     String   @unique
-  age       Int
-  role      Role
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email     String    @unique
+  age       String
+  password  String
+  isActive  Boolean   @default(false)
+  Review    Reviews[]
+  role      Roles     @relation(fields: [roleId], references: [id])
+  roleId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Order     Orders[]
 }
 
-enum Role {
-  ADMIN
-  USER
-  RESTAURANT
+model Roles {
+  id    String  @id @default(cuid())
+  name  String  @unique
+  Users Users[]
+}
+
+model Orders {
+  id         String     @id @default(cuid())
+  detail     String
+  payment    Int
+  status     String
+  total      Int
+  service    Services   @relation(fields: [serviceId], references: [id])
+  serviceId  String
+  user       Users      @relation(fields: [userId], references: [id])
+  userId     String
+  facility   Facilities @relation(fields: [facilityId], references: [id])
+  facilityId String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Services {
+  id    String   @id @default(cuid())
+  type  String
+  Order Orders[]
+}
+
+model Facilities {
+  id           String      @id @default(cuid())
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  phone        String
+  address      String[]
+  Orders       Orders[]
+  Products     Products[]
+}
+
+model Products {
+  id          String     @id @default(cuid())
+  productName String
+  price       Int
+  category    String
+  subcategory String
+  description String
+  image       String
+  facility    Facilities @relation(fields: [facilityId], references: [id])
+  facilityId  String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Restaurants {
+  id                String       @id @default(cuid())
+  nit               String
+  businessName      String
+  title             String
+  phone             String
+  address           String[]
+  about             String
+  latitude          Float
+  longitude         Float
+  image             String
+  cuisines          String[]
+  opening_hour      Int
+  closing_hour      Int
+  opening_first_day String
+  opening_last_day  String
+  cost_two          Int
+  rating            Float
+  trending          Boolean
+  delivery_time     Int
+  logo              String
+  services          String[]
+  reviews           Reviews[]
+  Gallery           Galleries[]
+  Facilities        Facilities[]
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+model Galleries {
+  id           String      @id @default(cuid())
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  ImageUrl     String
+}
+
+model Reviews {
+  id           String      @id @default(cuid())
+  title        String
+  rating       Int
+  message      String
+  user         Users       @relation(fields: [userId], references: [id])
+  userId       String
+  Restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
