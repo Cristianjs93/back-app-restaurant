@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { hashPasswordSync } from '../auth/utils/bycript.ts';
-import { rolesSeeder } from '../api/roles/roles.seeder.ts';
+import { hashPasswordSync } from '../auth/utils/bycript';
+import { rolesSeeder } from '../api/roles/roles.seeder';
 
 const [_, client] = rolesSeeder;
 

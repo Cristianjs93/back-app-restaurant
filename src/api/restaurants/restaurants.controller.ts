@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { AuthRequestRestaurants } from '../../auth/auth.types.ts';
-import errorHandler from '../../utils/errorHandler.ts';
+import { AuthRequestRestaurants } from '../../auth/auth.types';
+import errorHandler from '../../utils/errorHandler';
 import {
   getAllRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
-} from './restaurants.services.ts';
+} from './restaurants.services';
 
 export async function getAllRestaurantsHandler(req: Request, res: Response) {
   try {

@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { AuthRequestReviews } from '../../auth/auth.types.ts';
-import errorHandler from '../../utils/errorHandler.ts';
+import { AuthRequestReviews } from '../../auth/auth.types';
+import errorHandler from '../../utils/errorHandler';
 import {
   getAllReviews,
   getReviewById,
   createReview,
   updateReview,
   deleteReview,
-} from './reviews.services.ts';
+} from './reviews.services';
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
   try {

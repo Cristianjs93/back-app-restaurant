@@ -5,7 +5,7 @@ import {
   createReviewHandler,
   updateReviewHandler,
   deleteReviewHandler,
-} from './reviews.controller.ts';
+} from './reviews.controller';
 
 const router = Router();
 

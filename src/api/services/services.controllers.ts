@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler.ts';
+import errorHandler from '../../utils/errorHandler';
 import {
   getAllServices,
   getServiceById,
   createService,
   updateService,
   deleteService,
-} from './services.services.ts';
+} from './services.services';
 
 export async function getAllServicesHandler(req: Request, res: Response) {
   try {

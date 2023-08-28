@@ -8,11 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginHandler = void 0;
 const user_services_1 = require("../../api/users/user.services");
 const bycript_1 = require("../utils/bycript");
 const auth_services_1 = require("../auth.services");
+const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
 function loginHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { email, password } = req.body;
@@ -31,14 +34,19 @@ function loginHandler(req, res) {
             };
             const token = (0, auth_services_1.signToken)(payload);
             const newUser = {
-                firstName: user.firstname,
-                lastName: user.lastname,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
-                role: user.roleId
+                role: user.roleId,
             };
-            return res.status(200).json({ token, newUser });
+            return res.status(200).send({ token, newUser });
         }
-        catch (error) { }
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
+        }
     });
 }
-exports.loginHandler = loginHandler;
+exports.default = {
+    loginHandler,
+};

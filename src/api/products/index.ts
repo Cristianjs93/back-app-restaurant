@@ -5,7 +5,7 @@ import {
   createProductHandler,
   updateProductHandler,
   deleteProductHandler,
-} from './product.controller.ts';
+} from './product.controller';
 
 const router = Router();
 

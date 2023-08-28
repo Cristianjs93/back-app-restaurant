@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { AuthRequestFacilities } from '../../auth/auth.types.ts';
-import errorHandler from '../../utils/errorHandler.ts';
+import { AuthRequestFacilities } from '../../auth/auth.types';
+import errorHandler from '../../utils/errorHandler';
 import {
   getAllFacilities,
   getFacilityById,
   createFacility,
   updateFacility,
   deleteFacility,
-} from './facilities.services.ts';
+} from './facilities.services';
 
 export async function getAllFacilitiesHandler(req: Request, res: Response) {
   try {

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Services } from './services.types.ts';
+import { Services } from './services.types';
 
 const primsa = new PrismaClient();
 

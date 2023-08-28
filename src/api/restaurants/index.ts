@@ -5,7 +5,7 @@ import {
   createRestaurantHandler,
   updateRestaurantHandler,
   deleteRestaurantHandler,
-} from './restaurants.controller.ts';
+} from './restaurants.controller';
 
 const router = Router();
 

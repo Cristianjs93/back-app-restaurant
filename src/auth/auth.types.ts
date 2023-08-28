@@ -1,11 +1,11 @@
 import { Request } from 'express';
-import { Users } from '../api/users/user.types.ts';
-import { Restaurants } from '../api/restaurants/restaurants.types.ts';
-import { Facilities } from '../api/facilities/facilities.types.ts';
-import { Reviews } from '../api/reviews/reviews.types.ts';
-import { Services } from '../api/services/services.types.ts';
-import { Orders } from '../api/orders/orders.types.ts';
-import { Products } from '../api/products/product.types.ts';
+import { Users } from '../api/users/user.types';
+import { Restaurants } from '../api/restaurants/restaurants.types';
+import { Facilities } from '../api/facilities/facilities.types';
+import { Reviews } from '../api/reviews/reviews.types';
+import { Services } from '../api/services/services.types';
+import { Orders } from '../api/orders/orders.types';
+import { Products } from '../api/products/product.types';
 
 export type PayloadType = {
   id: string;

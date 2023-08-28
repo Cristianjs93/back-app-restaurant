@@ -5,7 +5,7 @@ import {
   createOrderHandler,
   updateOrderHandler,
   deleteOrderHandler,
-} from './orders.controller.ts';
+} from './orders.controller';
 
 const router = Router();
 

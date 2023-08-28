@@ -12,7 +12,9 @@ const verifyToken = (token) => {
 };
 exports.verifyToken = verifyToken;
 const signToken = (payload) => {
-    const token = jsonwebtoken_1.default.sign(payload, SECRET, { expiresIn: `${1000 * 60 * 60 * 24}` });
+    const token = jsonwebtoken_1.default.sign(payload, SECRET, {
+        expiresIn: `${1000 * 60 * 60 * 24}`,
+    });
     return token;
 };
 exports.signToken = signToken;

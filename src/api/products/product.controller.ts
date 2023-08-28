@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler.ts';
-import { AuthRequestProducts } from '../../auth/auth.types.ts';
+import errorHandler from '../../utils/errorHandler';
+import { AuthRequestProducts } from '../../auth/auth.types';
 
 import {
   getAllProducts,
@@ -8,7 +8,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-} from './product.service.ts';
+} from './product.service';
 
 export async function getAllProductsHandler(req: Request, res: Response) {
   try {

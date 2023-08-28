@@ -1,4 +1,4 @@
-import { RestaurantsSeeder } from './restaurants.types.ts';
-import { fakerRestaurants } from '../../faker/faker.ts';
+import { RestaurantsSeeder } from './restaurants.types';
+import { fakerRestaurants } from '../../faker/faker';
 
 export const restaurantsSeeder: RestaurantsSeeder[] = [...fakerRestaurants];

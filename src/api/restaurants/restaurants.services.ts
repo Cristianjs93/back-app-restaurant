@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Restaurants } from './restaurants.types.ts';
+import { Restaurants } from './restaurants.types';
 
 const prisma = new PrismaClient();
 

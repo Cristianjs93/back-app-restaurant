@@ -1,9 +1,9 @@
 import { Response, NextFunction } from 'express';
 
-import { getUserByEmail } from '../api/users/user.services.ts';
-import { AuthRequest } from './auth.types.ts';
-import { Users } from '../api/users/user.types.ts';
-import { verifyToken } from './auth.services.ts';
+import { getUserByEmail } from '../api/users/user.services';
+import { AuthRequest } from './auth.types';
+import { Users } from '../api/users/user.types';
+import { verifyToken } from './auth.services';
 
 export const isAuthenticated = async (
   req: AuthRequest,

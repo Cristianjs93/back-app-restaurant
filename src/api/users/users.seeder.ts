@@ -1,7 +1,7 @@
-import { UsersSeeders } from './user.types.ts';
-import { rolesSeeder } from '../roles/roles.seeder.ts';
-import { hashPasswordSync } from '../../auth/utils/bycript.ts';
-import { fakerUsers } from '../../faker/faker.ts';
+import { UsersSeeders } from './user.types';
+import { rolesSeeder } from '../roles/roles.seeder';
+import { hashPasswordSync } from '../../auth/utils/bycript';
+import { fakerUsers } from '../../faker/faker';
 
 const [admin] = rolesSeeder;
 

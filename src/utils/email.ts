@@ -1,4 +1,4 @@
-import { Users } from '../api/users/user.types.ts';
+import { Users } from '../api/users/user.types';
 
 export const welcomeEmail = (users: Users) => {
   type Styles = {

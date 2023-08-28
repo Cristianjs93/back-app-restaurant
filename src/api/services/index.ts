@@ -5,7 +5,7 @@ import {
   createServiceHandler,
   updateServiceHandler,
   deleteServiceHandler,
-} from './services.controllers.ts';
+} from './services.controllers';
 
 const router = Router();
 

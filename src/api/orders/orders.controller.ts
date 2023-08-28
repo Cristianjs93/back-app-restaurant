@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { AuthRequestOrders } from '../../auth/auth.types.ts';
-import errorHandler from '../../utils/errorHandler.ts';
+import { AuthRequestOrders } from '../../auth/auth.types';
+import errorHandler from '../../utils/errorHandler';
 
 import {
   getAllOrders,
@@ -8,7 +8,7 @@ import {
   createOrder,
   updateOrder,
   deleteOrder,
-} from './orders.services.ts';
+} from './orders.services';
 
 export async function getAllOrdersHandler(req: Request, res: Response) {
   try {

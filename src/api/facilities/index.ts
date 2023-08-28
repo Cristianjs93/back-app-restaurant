@@ -5,7 +5,7 @@ import {
   createFacilityHandler,
   updateFacilityHandler,
   deleteFacilityHandler,
-} from './facilities.controller.ts';
+} from './facilities.controller';
 
 const router = Router();
 

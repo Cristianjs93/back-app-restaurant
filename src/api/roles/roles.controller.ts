@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler.ts';
-import { getRoles } from './roles.services.ts';
+import errorHandler from '../../utils/errorHandler';
+import { getRoles } from './roles.services';
 
 export async function getAllRoles(req: Request, res: Response) {
   try {

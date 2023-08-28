@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { PayloadType } from './auth.types.ts';
+import { PayloadType } from './auth.types';
 
 const SECRET = process.env.JWT_SECRET as string;
 

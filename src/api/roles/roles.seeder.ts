@@ -1,4 +1,4 @@
-import { RolesSeeder } from './roles.types.ts';
+import { RolesSeeder } from './roles.types';
 
 export const rolesSeeder: RolesSeeder[] = [
   { id: 'cllim4uqr0001wrwkmd6zb8um', name: 'ADMIN' },

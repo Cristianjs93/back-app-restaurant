@@ -25,7 +25,7 @@ function createUser(input) {
         const hashedPassword = yield (0, bycript_1.hashPassword)(input.password);
         const data = Object.assign(Object.assign({}, input), { password: hashedPassword });
         const user = yield prisma.users.create({
-            data
+            data,
         });
         return user;
     });

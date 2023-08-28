@@ -22,7 +22,7 @@ const isAuthenticated = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     if (!decoded) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    const user = yield (0, user_services_1.getUserByEmail)(decoded.email);
+    const user = (yield (0, user_services_1.getUserByEmail)(decoded.email));
     req.users = user;
     return next();
 });
@@ -30,12 +30,16 @@ exports.isAuthenticated = isAuthenticated;
 const hasRole = (allowRoles) => {
     return (req, res, next) => {
         const { roles } = req.users;
-        const userRoles = roles.map(({ Role }) => Role.name);
-        const hasPermission = allowRoles.some((role) => userRoles.includes(role));
+        const userRoles = roles.map(({ Role }) => {
+            return Role.name;
+        });
+        const hasPermission = allowRoles.some((role) => {
+            return userRoles.includes(role);
+        });
         if (!hasPermission) {
             return res.status(403).json({ message: 'Forbidden' });
         }
-        next();
+        return next();
     };
 };
 exports.hasRole = hasRole;

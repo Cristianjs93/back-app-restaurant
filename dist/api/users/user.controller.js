@@ -8,17 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserHandler = exports.updateUserHandler = exports.createUserHandler = exports.getUserByEmailHandler = exports.getUserByIdHandler = exports.getAllUsersHandler = void 0;
+const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
+const nodemailer_1 = require("../../config/nodemailer");
+const email_1 = require("../../utils/email");
 const user_services_1 = require("./user.services");
 function getAllUsersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const users = yield (0, user_services_1.getAllUsers)();
-            res.status(200).json(users);
+            return res.status(200).send(users);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }
@@ -30,13 +37,14 @@ function getUserByIdHandler(req, res) {
             const user = yield (0, user_services_1.getUserById)(id);
             if (!user) {
                 return res.status(404).json({
-                    message: "User not found"
+                    message: 'User not found',
                 });
             }
-            res.status(200).json(user);
+            return res.status(200).send(user);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }
@@ -48,13 +56,14 @@ function getUserByEmailHandler(req, res) {
             const user = yield (0, user_services_1.getUserByEmail)(email);
             if (!user) {
                 return res.status(404).json({
-                    message: "User not found"
+                    message: 'User not found',
                 });
             }
             return res.status(200).json(user);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }
@@ -64,10 +73,12 @@ function createUserHandler(req, res) {
         try {
             const data = req.body;
             const user = yield (0, user_services_1.createUser)(data);
-            res.status(201).json(user);
+            yield (0, nodemailer_1.sendNodemailer)((0, email_1.welcomeEmail)(user));
+            return res.status(201).json(user);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }
@@ -79,13 +90,14 @@ function updateUserHandler(req, res) {
             const user = yield (0, user_services_1.updateUser)(data);
             if (!user) {
                 return res.status(404).json({
-                    message: "User not found"
+                    message: 'User not found',
                 });
             }
-            res.status(200).json(user);
+            return res.status(200).json(user);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }
@@ -97,13 +109,15 @@ function deleteUserHandler(req, res) {
             const user = yield (0, user_services_1.getUserByEmail)(id);
             if (!user) {
                 return res.status(404).json({
-                    message: "User not found"
+                    message: 'User not found',
                 });
             }
             yield (0, user_services_1.deleteUser)(id);
+            return res.status(200).send(user);
         }
-        catch (error) {
-            res.status(400).send({ message: error.message });
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            return res.status(400).send({ message });
         }
     });
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import loginHandler from './local.controller.ts';
+import loginHandler from './local.controller';
 
 const route = Router();
 

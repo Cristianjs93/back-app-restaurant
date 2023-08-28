@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { ReviewsSeeder } from './reviews.types.ts';
-import { usersSeeder } from '../users/users.seeder.ts';
-import { restaurantsSeeder } from '../restaurants/restaurants.seeder.ts';
+import { ReviewsSeeder } from './reviews.types';
+import { usersSeeder } from '../users/users.seeder';
+import { restaurantsSeeder } from '../restaurants/restaurants.seeder';
 
 function getRandomNumber(min: number, max: number) {
   const randomDecimal = Math.random();

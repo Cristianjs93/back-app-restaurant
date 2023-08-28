@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { Users } from './user.types.ts';
-import { AuthRequest } from '../../auth/auth.types.ts';
-import errorHandler from '../../utils/errorHandler.ts';
-import { sendNodemailer } from '../../config/nodemailer.ts';
-import { welcomeEmail } from '../../utils/email.ts';
+import { Users } from './user.types';
+import { AuthRequest } from '../../auth/auth.types';
+import errorHandler from '../../utils/errorHandler';
+import { sendNodemailer } from '../../config/nodemailer';
+import { welcomeEmail } from '../../utils/email';
 
 import {
   getAllUsers,
@@ -12,7 +12,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
-} from './user.services.ts';
+} from './user.services';
 
 export async function getAllUsersHandler(req: Request, res: Response) {
   try {

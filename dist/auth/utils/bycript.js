@@ -12,14 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.comparePassword = exports.hashPassword = void 0;
+exports.hashPasswordSync = exports.comparePassword = exports.hashPassword = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const hashPassword = (password, factor) => __awaiter(void 0, void 0, void 0, function* () {
     const salt = yield bcrypt_1.default.genSalt(factor);
-    return yield bcrypt_1.default.hash(password, salt);
+    const data = yield bcrypt_1.default.hash(password, salt);
+    return data;
 });
 exports.hashPassword = hashPassword;
 const comparePassword = (password, hashedPassword) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield bcrypt_1.default.compare(password, hashedPassword);
+    const comparedPassword = yield bcrypt_1.default.compare(password, hashedPassword);
+    return comparedPassword;
 });
 exports.comparePassword = comparePassword;
+const hashPasswordSync = (password, factor) => {
+    const salt = bcrypt_1.default.genSaltSync(factor);
+    return bcrypt_1.default.hashSync(password, salt);
+};
+exports.hashPasswordSync = hashPasswordSync;

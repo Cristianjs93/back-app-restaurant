@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const facilities_controller_1 = require("./facilities.controller");
+const router = (0, express_1.Router)();
+router.get('/', facilities_controller_1.getAllFacilitiesHandler);
+router.get('/:id', facilities_controller_1.getFacilityByIdHandler);
+router.post('/', facilities_controller_1.createFacilityHandler);
+router.put('/', facilities_controller_1.updateFacilityHandler);
+router.delete('/', facilities_controller_1.deleteFacilityHandler);
+exports.default = router;

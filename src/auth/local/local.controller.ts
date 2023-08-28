@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { getUserByEmail } from '../../api/users/user.services.ts';
-import { comparePassword } from '../utils/bycript.ts';
-import { signToken } from '../auth.services.ts';
-import errorHandler from '../../utils/errorHandler.ts';
+import { getUserByEmail } from '../../api/users/user.services';
+import { comparePassword } from '../utils/bycript';
+import { signToken } from '../auth.services';
+import errorHandler from '../../utils/errorHandler';
 
 async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
