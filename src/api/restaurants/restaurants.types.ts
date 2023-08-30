@@ -6,3 +6,8 @@ export type RestaurantsSeeder = Omit<
   Restaurants,
   'reviews' | 'Gallery' | 'Facilities' | 'updatedAt' | 'createdAt'
 >;
+
+export type RestaurantsFiltered = Omit<
+  Restaurants,
+  'nit' | 'businessName' | 'Facilities' | 'updatedAt'
+>;
