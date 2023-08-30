@@ -36,7 +36,6 @@ export const pagination = () => {
     }
 
     results.data = allRestaurants.slice(startIndex, endIndex);
-    results.data = allRestaurants;
 
     res.paginatedResults = results.data;
     next();
