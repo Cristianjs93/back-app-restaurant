@@ -2,17 +2,21 @@ import { Request, Response } from 'express';
 import { AuthRequestRestaurants } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
 import {
-  getAllRestaurants,
   getRestaurantById,
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
 } from './restaurants.services';
 
-export async function getAllRestaurantsHandler(req: Request, res: Response) {
+import { ResponsePaginator } from '../../pagination/pagination.types';
+
+export async function getAllRestaurantsHandler(
+  _: Request,
+  res: ResponsePaginator,
+) {
   try {
-    const restaurants = await getAllRestaurants();
-    return res.status(200).json(restaurants);
+    const { paginatedResults } = res;
+    return res.status(200).json(paginatedResults);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
