@@ -19,6 +19,21 @@ export const fakerUsers = Array.from({ length: 20 }).map(() => {
   };
 });
 
+const cuisines = [
+  'asian',
+  'seafood',
+  'veggie',
+  'sushi',
+  'italian',
+  'pizza',
+  'western',
+  'chinese',
+  'mexican',
+  'fast Food',
+  'desserts',
+  'bakery',
+];
+
 export const fakerRestaurants = Array.from({ length: 60 }).map(() => {
   return {
     id: faker.string.uuid(),
@@ -31,7 +46,10 @@ export const fakerRestaurants = Array.from({ length: 60 }).map(() => {
     latitude: faker.location.latitude({ max: 80, min: -80, precision: 5 }),
     longitude: faker.location.longitude({ max: 80, min: -80, precision: 5 }),
     image: 'https://picsum.photos/500/300',
-    cuisines: [faker.location.country(), faker.location.country()],
+    cuisines: [
+      cuisines[faker.number.int({ min: 0, max: 11 })],
+      cuisines[faker.number.int({ min: 0, max: 11 })],
+    ],
     opening_hour: faker.number.int({ min: 2, max: 5 }),
     closing_hour: faker.number.int({ min: 9, max: 11 }),
     opening_first_day: faker.date.weekday({ abbreviated: true }),

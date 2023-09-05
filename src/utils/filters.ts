@@ -28,3 +28,35 @@ export const filteredData = (data: RestaurantsFiltered[], filter: string) => {
     return recentRestaurants;
   }
 };
+
+export const filteredByObject = (
+  data: RestaurantsFiltered[],
+  cuisine: string,
+  star: string,
+  delivery: string,
+) => {
+  console.log(cuisine, star, delivery);
+
+  const filteredByCuisine = data.filter(
+    (item: RestaurantsFiltered) => item.cuisines.includes(cuisine) && item,
+  );
+  console.log('cuisinesFiltered', filteredByCuisine.length);
+  const filteredByDelivery = filteredByCuisine.filter(
+    (subItem: RestaurantsFiltered) =>
+      subItem.delivery_time <= parseInt(delivery) && subItem,
+  );
+
+  console.log('deliveryFiltered', filteredByDelivery.length);
+
+  const filteredByStar = filteredByDelivery.filter(
+    (lastItem: RestaurantsFiltered) =>
+      lastItem.rating >= parseInt(star) && lastItem,
+  );
+
+  console.log('starFiltered', filteredByStar.length);
+
+  const result = filteredByStar;
+  // console.log(result);
+
+  return result;
+};

@@ -5,11 +5,15 @@ import {
   PaginationResult,
 } from './pagination.types';
 import { getAllRestaurants } from '../api/restaurants/restaurants.services';
-import { filteredData } from '../utils/filters';
+import { filteredData, filteredByObject } from '../utils/filters';
+import { RestaurantsFiltered } from '../api/restaurants/restaurants.types';
 
 export const pagination = () => {
   return async (req: Request, res: ResponsePaginator, next: NextFunction) => {
-    const { filter, page, limit } = req.query as PaginationQueryParams;
+    const { filter, page, limit, cuisine, star, delivery } =
+      req.query as PaginationQueryParams;
+
+    // console.log(filter, page, limit, cuisine, star, delivery);
 
     const pageData = parseInt(page);
 
@@ -17,34 +21,73 @@ export const pagination = () => {
 
     const allRestaurants = await getAllRestaurants();
 
-    const filteredRestaurants = filteredData(allRestaurants, filter);
+    if (cuisine && star && delivery) {
+      const filtered = filteredData(allRestaurants, filter);
 
-    const startIndex = (pageData - 1) * limitData;
-    const endIndex = pageData * limitData;
+      const filteredRestaurants = filteredByObject(
+        filtered as RestaurantsFiltered[],
+        cuisine,
+        star,
+        delivery,
+      );
 
-    const results = {} as PaginationResult;
+      const startIndex = (pageData - 1) * limitData;
+      const endIndex = pageData * limitData;
 
-    if (filteredRestaurants) {
-      if (endIndex < filteredRestaurants.length) {
-        results.next = {
-          page: pageData + 1,
-          limit: limitData,
-        };
+      const results = {} as PaginationResult;
+
+      if (filteredRestaurants) {
+        if (endIndex < filteredRestaurants.length) {
+          results.next = {
+            page: pageData + 1,
+            limit: limitData,
+          };
+        }
+
+        if (startIndex) {
+          results.previous = {
+            page: pageData - 1,
+            limit: limitData,
+          };
+        }
+
+        results.length = filteredRestaurants.length;
+
+        results.data = filteredRestaurants.slice(startIndex, endIndex);
+
+        res.paginatedResults = results;
+        next();
       }
+    } else {
+      const filteredRestaurants = filteredData(allRestaurants, filter);
 
-      if (startIndex) {
-        results.previous = {
-          page: pageData - 1,
-          limit: limitData,
-        };
+      const startIndex = (pageData - 1) * limitData;
+      const endIndex = pageData * limitData;
+
+      const results = {} as PaginationResult;
+
+      if (filteredRestaurants) {
+        if (endIndex < filteredRestaurants.length) {
+          results.next = {
+            page: pageData + 1,
+            limit: limitData,
+          };
+        }
+
+        if (startIndex) {
+          results.previous = {
+            page: pageData - 1,
+            limit: limitData,
+          };
+        }
+
+        results.length = filteredRestaurants.length;
+
+        results.data = filteredRestaurants.slice(startIndex, endIndex);
+
+        res.paginatedResults = results;
+        next();
       }
-
-      results.length = filteredRestaurants.length;
-
-      results.data = filteredRestaurants.slice(startIndex, endIndex);
-
-      res.paginatedResults = results;
-      next();
     }
   };
 };
