@@ -8,7 +8,7 @@ function getRandomNumber(min: number, max: number) {
   const randomNumberInRange = min + randomDecimal * (max - min + 1);
   return Math.floor(randomNumberInRange);
 }
-const fakerReviews = Array.from({ length: 100 }).map(() => {
+const fakerReviews = Array.from({ length: 200 }).map(() => {
   return {
     userId: usersSeeder[getRandomNumber(0, usersSeeder.length - 1)].id,
     restaurantId:

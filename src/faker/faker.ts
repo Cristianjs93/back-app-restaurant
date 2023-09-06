@@ -4,7 +4,7 @@ import { rolesSeeder } from '../api/roles/roles.seeder';
 
 const [_, client] = rolesSeeder;
 
-export const fakerUsers = Array.from({ length: 20 }).map(() => {
+export const fakerUsers = Array.from({ length: 50 }).map(() => {
   return {
     id: faker.string.uuid(),
     firstName: faker.internet.userName(),
@@ -34,7 +34,7 @@ const cuisines = [
   'bakery',
 ];
 
-export const fakerRestaurants = Array.from({ length: 60 }).map(() => {
+export const fakerRestaurants = Array.from({ length: 100 }).map(() => {
   return {
     id: faker.string.uuid(),
     nit: faker.string.numeric({ length: 9 }),
@@ -57,7 +57,7 @@ export const fakerRestaurants = Array.from({ length: 60 }).map(() => {
     cost_two: faker.number.int({ min: 10, max: 100 }),
     rating: faker.number.float({ min: 1, max: 5, precision: 0.1 }),
     trending: faker.datatype.boolean(0.4),
-    delivery_time: faker.number.int({ min: 10, max: 60 }),
+    delivery_time: faker.number.int({ min: 10, max: 90 }),
     logo: `https://img.logoipsum.com/${faker.number.int({
       min: 211,
       max: 299,
