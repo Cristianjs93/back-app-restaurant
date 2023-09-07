@@ -16,58 +16,18 @@ export const pagination = () => {
 
     const allRestaurants = await getAllRestaurants();
 
-    if (cuisine && !star && !delivery) {
-      const filteredByCuisine = allRestaurants.filter(
-        (item: RestaurantsFiltered) => item.cuisines.includes(cuisine) && item,
-      );
-      const results = paginationGenerator(
-        filteredByCuisine,
-        pageData,
-        limitData,
-      );
+    const filteredRestaurants = filteredData(allRestaurants, filter);
 
-      res.paginatedResults = results;
-      next();
-    }
-
-    if (!cuisine && star && !delivery) {
-      const filteredByStar = allRestaurants.filter(
-        (item: RestaurantsFiltered) => item.rating >= parseInt(star) && item,
-      );
-      const results = paginationGenerator(filteredByStar, pageData, limitData);
-
-      res.paginatedResults = results;
-      next();
-    }
-
-    if (!cuisine && !star && delivery) {
-      const filteredByDelivery = allRestaurants.filter(
-        (item: RestaurantsFiltered) =>
-          item.delivery_time <= parseInt(delivery) && item,
-      );
-
-      const results = paginationGenerator(
-        filteredByDelivery,
-        pageData,
-        limitData,
-      );
-
-      res.paginatedResults = results;
-      next();
-    }
-
-    if (cuisine && star && delivery) {
-      const filtered = filteredData(allRestaurants, filter);
-
-      const filteredRestaurants = filteredByObject(
-        filtered as RestaurantsFiltered[],
+    if (cuisine || star || delivery) {
+      const filteredRestaurantsByObject = filteredByObject(
+        filteredRestaurants as RestaurantsFiltered[],
         cuisine,
         star,
         delivery,
       );
 
       const results = paginationGenerator(
-        filteredRestaurants,
+        filteredRestaurantsByObject,
         pageData,
         limitData,
       );
@@ -75,7 +35,6 @@ export const pagination = () => {
       res.paginatedResults = results;
       next();
     } else {
-      const filteredRestaurants = filteredData(allRestaurants, filter);
       if (filteredRestaurants) {
         const results = paginationGenerator(
           filteredRestaurants,

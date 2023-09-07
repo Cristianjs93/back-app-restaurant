@@ -36,21 +36,47 @@ export const filteredByObject = (
   delivery: string,
 ) => {
   let result = [];
+  let filteredByCuisine = [];
+  let filteredByDelivery = [];
+  let filteredByStar = [];
 
-  const filteredByCuisine = data.filter(
-    (item: RestaurantsFiltered) => item.cuisines.includes(cuisine) && item,
-  );
-  const filteredByDelivery = filteredByCuisine.filter(
-    (subItem: RestaurantsFiltered) =>
-      subItem.delivery_time <= parseInt(delivery) && subItem,
-  );
+  cuisine
+    ? (filteredByCuisine = data.filter(
+        (item: RestaurantsFiltered) => item.cuisines.includes(cuisine) && item,
+      ))
+    : (filteredByCuisine = data);
 
-  const filteredByStar = filteredByDelivery.filter(
-    (lastItem: RestaurantsFiltered) =>
-      lastItem.rating >= parseInt(star) && lastItem,
-  );
+  delivery
+    ? (filteredByDelivery = data.filter(
+        (item: RestaurantsFiltered) =>
+          item.delivery_time <= parseInt(delivery) && item,
+      ))
+    : (filteredByDelivery = data);
 
-  result = filteredByStar;
+  star
+    ? (filteredByStar = data.filter(
+        (item: RestaurantsFiltered) => item.rating >= parseInt(star) && item,
+      ))
+    : (filteredByStar = data);
+
+  result = commonRestaurants(
+    filteredByCuisine,
+    filteredByDelivery,
+    filteredByStar,
+  );
 
   return result;
+};
+
+const commonRestaurants = (array1: any, array2: any, array3: any) => {
+  return array1.filter((restaurant1: any) => {
+    const presentInArray2 = array2.some(
+      (restaurant2: any) => restaurant2.id === restaurant1.id,
+    );
+    const presentInArray3 = array3.some(
+      (restaurant3: any) => restaurant3.id === restaurant1.id,
+    );
+
+    return presentInArray2 && presentInArray3;
+  });
 };

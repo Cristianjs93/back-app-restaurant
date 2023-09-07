@@ -21,20 +21,30 @@ export const fakerUsers = Array.from({ length: 50 }).map(() => {
 
 const cuisines = [
   'asian',
+  'western',
+  'mexican',
+  'chinese',
+  'italian',
+  'sushi',
+  'desserts',
   'seafood',
   'veggie',
-  'sushi',
-  'italian',
-  'pizza',
-  'western',
-  'chinese',
-  'mexican',
-  'fast Food',
-  'desserts',
   'bakery',
+  'pizza',
 ];
 
-export const fakerRestaurants = Array.from({ length: 100 }).map(() => {
+const services = [
+  'Card Accepted',
+  'Parking Avaliable',
+  'Banquet Area',
+  'Home Delivery',
+  'Table Booking',
+  'Avaliable For Events',
+  'Game Zone',
+  'Live Music',
+];
+
+export const fakerRestaurants = Array.from({ length: 100 }).map((_, index) => {
   return {
     id: faker.string.uuid(),
     nit: faker.string.numeric({ length: 9 }),
@@ -43,12 +53,23 @@ export const fakerRestaurants = Array.from({ length: 100 }).map(() => {
     phone: faker.phone.number(),
     address: [faker.location.streetAddress(), faker.location.streetAddress()],
     about: faker.company.buzzPhrase(),
-    latitude: faker.location.latitude({ max: 80, min: -80, precision: 5 }),
-    longitude: faker.location.longitude({ max: 80, min: -80, precision: 5 }),
-    image: 'https://picsum.photos/500/300',
+    latitude: faker.location.latitude({
+      max: 40.9176,
+      min: 40.4774,
+      precision: 4,
+    }),
+    longitude: faker.location.longitude({
+      max: -73.7004,
+      min: -74.2591,
+      precision: 4,
+    }),
+    image:
+      index <= 9
+        ? `https://picsum.photos/50${index}/300`
+        : `https://picsum.photos/5${index}/300`,
     cuisines: [
-      cuisines[faker.number.int({ min: 0, max: 11 })],
-      cuisines[faker.number.int({ min: 0, max: 11 })],
+      cuisines[faker.number.int({ min: 0, max: 5 })],
+      cuisines[faker.number.int({ min: 6, max: 10 })],
     ],
     opening_hour: faker.number.int({ min: 2, max: 5 }),
     closing_hour: faker.number.int({ min: 9, max: 11 }),
@@ -57,19 +78,16 @@ export const fakerRestaurants = Array.from({ length: 100 }).map(() => {
     cost_two: faker.number.int({ min: 10, max: 100 }),
     rating: faker.number.float({ min: 1, max: 5, precision: 0.1 }),
     trending: faker.datatype.boolean(0.4),
-    delivery_time: faker.number.int({ min: 10, max: 90 }),
+    delivery_time: faker.number.int({ min: 10, max: 80 }),
     logo: `https://img.logoipsum.com/${faker.number.int({
       min: 211,
       max: 299,
     })}.svg`,
     services: [
-      'Card Accepted',
-      'Parking Avaliable',
-      'Banquet Area',
-      'Home Delivery',
-      'Table Booking',
-      'Avaliable For Events',
-      'Game Zone',
+      services[faker.number.int({ min: 0, max: 1 })],
+      services[faker.number.int({ min: 2, max: 3 })],
+      services[faker.number.int({ min: 4, max: 5 })],
+      services[faker.number.int({ min: 6, max: 7 })],
     ],
   };
 });
