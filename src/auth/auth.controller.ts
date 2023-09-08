@@ -24,20 +24,15 @@ export const isAuthenticated = async (
 
   const user = (await getUserByEmail(decoded.email)) as Users;
 
-  req.users = user;
+  req.user = user;
 
   return next();
 };
 
-export const hasRole = (allowRoles: string[]) => {
+export const hasRole = (rolesAllowed: string[]) => {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
-    const { roles } = req.users as any;
-    const userRoles = roles.map(({ Role }: any) => {
-      return Role.name;
-    });
-    const hasPermission = allowRoles.some((role) => {
-      return userRoles.includes(role);
-    });
+    const { roleId } = req.user as Users;
+    const hasPermission = rolesAllowed.includes(roleId);
 
     if (!hasPermission) {
       return res.status(403).json({ message: 'Forbidden' });

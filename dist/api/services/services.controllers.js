@@ -19,11 +19,11 @@ function getAllServicesHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const services = yield (0, services_services_1.getAllServices)();
-            return res.status(200).json(services);
+            res.status(200).json(services);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -36,11 +36,11 @@ function getServiceByIdHandler(req, res) {
             if (!service) {
                 return res.status(404).json({ message: 'service not found' });
             }
-            return res.status(200).json(service);
+            res.status(200).json(service);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -50,11 +50,11 @@ function createServiceHandler(req, res) {
         try {
             const data = req.body;
             const service = yield (0, services_services_1.createService)(data);
-            return res.status(201).json(service);
+            res.status(201).json(service);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -69,11 +69,11 @@ function updateServiceHandler(req, res) {
                     message: 'Service not found',
                 });
             }
-            return res.status(200).json(service);
+            res.status(200).json(service);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -89,11 +89,11 @@ function deleteServiceHandler(req, res) {
                 });
             }
             yield (0, services_services_1.deleteService)(id);
-            return res.status(200).json({ message: 'Service deleted succesfully' });
+            res.status(200).json({ message: 'Service deleted succesfully' });
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }

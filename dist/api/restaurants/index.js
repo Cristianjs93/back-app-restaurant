@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const restaurants_controller_1 = require("./restaurants.controller");
+const pagination_controller_1 = require("../../pagination/pagination.controller");
 const router = (0, express_1.Router)();
-router.get('/', restaurants_controller_1.getAllRestaurantsHandler);
+router.get('/', (0, pagination_controller_1.pagination)(), restaurants_controller_1.getAllRestaurantsHandler);
 router.get('/:id', restaurants_controller_1.getRestaurantByIdHandler);
 router.post('/', restaurants_controller_1.createRestaurantHandler);
 router.put('/', restaurants_controller_1.updateRestaurantHandler);

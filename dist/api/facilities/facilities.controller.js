@@ -19,11 +19,11 @@ function getAllFacilitiesHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const facilities = yield (0, facilities_services_1.getAllFacilities)();
-            return res.status(200).json(facilities);
+            res.status(200).json(facilities);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -38,11 +38,11 @@ function getFacilityByIdHandler(req, res) {
                     message: 'Facility not found',
                 });
             }
-            return res.status(200).json(facility);
+            res.status(200).json(facility);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -52,11 +52,11 @@ function createFacilityHandler(req, res) {
         try {
             const data = req.body;
             const facility = yield (0, facilities_services_1.createFacility)(data);
-            return res.status(201).json(facility);
+            res.status(201).json(facility);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -69,11 +69,11 @@ function updateFacilityHandler(req, res) {
             if (!facility) {
                 return res.status(404).json({ message: 'Facility not found' });
             }
-            return res.status(200).json(facility);
+            res.status(200).json(facility);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -88,12 +88,12 @@ function deleteFacilityHandler(req, res) {
                     message: 'Facility not found',
                 });
             }
-            return yield (0, facilities_services_1.deleteFacility)(id);
+            yield (0, facilities_services_1.deleteFacility)(id);
             res.status(200).json(facility);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }

@@ -16,10 +16,10 @@ export async function getAllRestaurantsHandler(
 ) {
   try {
     const { paginatedResults } = res;
-    return res.status(200).json(paginatedResults);
+    res.status(200).json(paginatedResults);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -34,10 +34,10 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(restaurant);
+    res.status(200).json(restaurant);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -47,10 +47,10 @@ export async function createRestaurantHandler(req: Request, res: Response) {
 
     const restaurant = await createRestaurant(data);
 
-    return res.status(201).json(restaurant);
+    res.status(201).json(restaurant);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -66,10 +66,10 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(restaurant);
+    res.status(200).json(restaurant);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -89,9 +89,9 @@ export async function deleteRestaurantHandler(
 
     await deleteRestaurant(id);
 
-    return res.status(200).json({ message: 'Restaurant deleted succesfully' });
+    res.status(200).json({ message: 'Restaurant deleted succesfully' });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }

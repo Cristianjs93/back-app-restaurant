@@ -13,10 +13,10 @@ import {
 export async function getAllProductsHandler(req: Request, res: Response) {
   try {
     const products = await getAllProducts();
-    return res.status(200).json(products);
+    res.status(200).json(products);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -30,10 +30,10 @@ export async function getProductByIdHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(product);
+    res.status(200).json(product);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -42,10 +42,10 @@ export async function createProductHandler(req: Request, res: Response) {
     const data = req.body;
     const product = await createProduct(data);
 
-    return res.status(201).json(product);
+    res.status(201).json(product);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -60,10 +60,10 @@ export async function updateProductHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(product);
+    res.status(200).json(product);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -81,9 +81,9 @@ export async function deleteProductHandler(
       });
     }
 
-    return res.status(200).json(product);
+    res.status(200).json(product);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }

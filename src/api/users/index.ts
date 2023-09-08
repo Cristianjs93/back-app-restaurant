@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { isAuthenticated } from '../../auth/auth.controller';
 import {
   getAllUsersHandler,
   getUserByIdHandler,
@@ -15,6 +16,6 @@ router.get('/:id', getUserByIdHandler);
 router.get('/user', getUserByEmailHandler);
 router.post('/', createUserHandler);
 router.put('/', updateUserHandler);
-router.delete('/', deleteUserHandler);
+router.delete('/', isAuthenticated, deleteUserHandler);
 
 export default router;

@@ -18,17 +18,17 @@ export async function getAllUsersHandler(req: Request, res: Response) {
   try {
     const users = await getAllUsers();
 
-    return res.status(200).send(users);
+    res.status(200).send(users);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
 export async function getUserByIdHandler(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.users as Users;
+    const { id } = req.user as Users;
 
     const user = await getUserById(id);
 
@@ -38,16 +38,16 @@ export async function getUserByIdHandler(req: AuthRequest, res: Response) {
       });
     }
 
-    return res.status(200).send(user);
+    res.status(200).send(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
 export async function getUserByEmailHandler(req: AuthRequest, res: Response) {
   try {
-    const { email } = req.users as Users;
+    const { email } = req.user as Users;
 
     const user = await getUserByEmail(email);
 
@@ -57,10 +57,10 @@ export async function getUserByEmailHandler(req: AuthRequest, res: Response) {
       });
     }
 
-    return res.status(200).json(user);
+    res.status(200).json(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -71,10 +71,10 @@ export async function createUserHandler(req: Request, res: Response) {
     const user = await createUser(data);
     await sendNodemailer(welcomeEmail(user));
 
-    return res.status(201).json(user);
+    res.status(201).json(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -90,16 +90,16 @@ export async function updateUserHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(user);
+    res.status(200).json(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
 export async function deleteUserHandler(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.users as Users;
+    const { id } = req.user as Users;
     const user = await getUserByEmail(id);
 
     if (!user) {
@@ -109,9 +109,9 @@ export async function deleteUserHandler(req: AuthRequest, res: Response) {
     }
     await deleteUser(id);
 
-    return res.status(200).send(user);
+    res.status(200).send(user);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }

@@ -11,10 +11,10 @@ import {
 export async function getAllServicesHandler(req: Request, res: Response) {
   try {
     const services = await getAllServices();
-    return res.status(200).json(services);
+    res.status(200).json(services);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -27,10 +27,10 @@ export async function getServiceByIdHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'service not found' });
     }
 
-    return res.status(200).json(service);
+    res.status(200).json(service);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -40,10 +40,10 @@ export async function createServiceHandler(req: Request, res: Response) {
 
     const service = await createService(data);
 
-    return res.status(201).json(service);
+    res.status(201).json(service);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -59,10 +59,10 @@ export async function updateServiceHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(service);
+    res.status(200).json(service);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -78,9 +78,9 @@ export async function deleteServiceHandler(req: Request, res: Response) {
     }
     await deleteService(id);
 
-    return res.status(200).json({ message: 'Service deleted succesfully' });
+    res.status(200).json({ message: 'Service deleted succesfully' });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
