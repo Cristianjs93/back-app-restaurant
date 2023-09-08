@@ -2,8 +2,6 @@ import { Request, Response } from 'express';
 import { Users } from './user.types';
 import { AuthRequest } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
-import { sendNodemailer } from '../../config/nodemailer';
-import { welcomeEmail } from '../../utils/email';
 
 import {
   getAllUsers,
