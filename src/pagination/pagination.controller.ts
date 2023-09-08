@@ -7,7 +7,7 @@ import { RestaurantsFiltered } from '../api/restaurants/restaurants.types';
 
 export const pagination = () => {
   return async (req: Request, res: ResponsePaginator, next: NextFunction) => {
-    const { filter, page, limit, cuisine, star, delivery } =
+    const { filter, page, limit, cuisine, star, cost, delivery } =
       req.query as PaginationQueryParams;
 
     const pageData = parseInt(page);
@@ -18,11 +18,12 @@ export const pagination = () => {
 
     const filteredRestaurants = filteredData(allRestaurants, filter);
 
-    if (cuisine || star || delivery) {
+    if (cuisine || star || cost || delivery) {
       const filteredRestaurantsByObject = filteredByObject(
         filteredRestaurants as RestaurantsFiltered[],
         cuisine,
         star,
+        cost,
         delivery,
       );
 

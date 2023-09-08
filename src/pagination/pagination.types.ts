@@ -9,6 +9,7 @@ export type PaginationQueryParams = {
   limit: string;
   cuisine: string;
   star: string;
+  cost: string;
   delivery: string;
 };
 

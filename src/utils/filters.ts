@@ -33,18 +33,32 @@ export const filteredByObject = (
   data: RestaurantsFiltered[],
   cuisine: string,
   star: string,
+  cost: string,
   delivery: string,
 ) => {
   let result = [];
   let filteredByCuisine = [];
-  let filteredByDelivery = [];
   let filteredByStar = [];
+  let filteredByCost = [];
+  let filteredByDelivery = [];
 
   cuisine
     ? (filteredByCuisine = data.filter(
         (item: RestaurantsFiltered) => item.cuisines.includes(cuisine) && item,
       ))
     : (filteredByCuisine = data);
+
+  star
+    ? (filteredByStar = data.filter(
+        (item: RestaurantsFiltered) => item.rating >= parseInt(star) && item,
+      ))
+    : (filteredByStar = data);
+
+  cost
+    ? (filteredByCost = data.filter(
+        (item: RestaurantsFiltered) => item.cost_two <= parseInt(cost) && item,
+      ))
+    : (filteredByCost = data);
 
   delivery
     ? (filteredByDelivery = data.filter(
@@ -53,30 +67,33 @@ export const filteredByObject = (
       ))
     : (filteredByDelivery = data);
 
-  star
-    ? (filteredByStar = data.filter(
-        (item: RestaurantsFiltered) => item.rating >= parseInt(star) && item,
-      ))
-    : (filteredByStar = data);
-
   result = commonRestaurants(
     filteredByCuisine,
-    filteredByDelivery,
     filteredByStar,
+    filteredByCost,
+    filteredByDelivery,
   );
 
   return result;
 };
 
-const commonRestaurants = (array1: any, array2: any, array3: any) => {
-  return array1.filter((restaurant1: any) => {
+const commonRestaurants = (
+  array1: RestaurantsFiltered[],
+  array2: RestaurantsFiltered[],
+  array3: RestaurantsFiltered[],
+  array4: RestaurantsFiltered[],
+) => {
+  return array1.filter((restaurant1: RestaurantsFiltered) => {
     const presentInArray2 = array2.some(
-      (restaurant2: any) => restaurant2.id === restaurant1.id,
+      (restaurant2: RestaurantsFiltered) => restaurant2.id === restaurant1.id,
     );
     const presentInArray3 = array3.some(
-      (restaurant3: any) => restaurant3.id === restaurant1.id,
+      (restaurant3: RestaurantsFiltered) => restaurant3.id === restaurant1.id,
+    );
+    const presentInArray4 = array4.some(
+      (restaurant4: RestaurantsFiltered) => restaurant4.id === restaurant1.id,
     );
 
-    return presentInArray2 && presentInArray3;
+    return presentInArray2 && presentInArray3 && presentInArray4;
   });
 };
