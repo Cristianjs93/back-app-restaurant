@@ -13,6 +13,7 @@ import {
   updateUser,
   deleteUser,
 } from './user.services';
+import { sendMailSenGrid } from '../../config/sendGrid';
 
 export async function getAllUsersHandler(req: Request, res: Response) {
   try {
@@ -69,7 +70,18 @@ export async function createUserHandler(req: Request, res: Response) {
     const data = req.body;
 
     const user = await createUser(data);
-    await sendNodemailer(welcomeEmail(user));
+
+    const emailData = {
+      from: 'AdminRicaApp <proyect.restaurant@gmail.com>',
+      to: user.email,
+      subjet: 'Welcome to Rica App',
+      templateId: 'd-3db2b553b737446a8f0d7e80e706e6fe',
+      dynamic_template_data: {
+        firstname: user.firstName,
+        lastname: user.lastName,
+      },
+    };
+    sendMailSenGrid(emailData);
 
     return res.status(201).json(user);
   } catch (exception: unknown) {
