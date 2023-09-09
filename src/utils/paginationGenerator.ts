@@ -5,6 +5,7 @@ export const paginationGenerator = (
   data: RestaurantsFiltered[],
   page: number,
   limit: number,
+  allData: RestaurantsFiltered[],
 ) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
@@ -28,6 +29,8 @@ export const paginationGenerator = (
   results.length = data.length;
 
   results.data = data.slice(startIndex, endIndex);
+
+  results.allRestaurants = allData;
 
   return results;
 };

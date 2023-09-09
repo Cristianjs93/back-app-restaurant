@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { hashPasswordSync } from '../auth/utils/bycript';
 import { rolesSeeder } from '../api/roles/roles.seeder';
+import { cuisines } from '../utils/data/cuisines';
+import { services } from '../utils/data/services';
 
 const [_, client] = rolesSeeder;
 
@@ -18,31 +20,6 @@ export const fakerUsers = Array.from({ length: 50 }).map(() => {
     roleId: client.id,
   };
 });
-
-const cuisines = [
-  'asian',
-  'western',
-  'mexican',
-  'chinese',
-  'italian',
-  'sushi',
-  'desserts',
-  'seafood',
-  'veggie',
-  'bakery',
-  'pizza',
-];
-
-const services = [
-  'Card Accepted',
-  'Parking Avaliable',
-  'Banquet Area',
-  'Home Delivery',
-  'Table Booking',
-  'Avaliable For Events',
-  'Game Zone',
-  'Live Music',
-];
 
 export const fakerRestaurants = Array.from({ length: 100 }).map((_, index) => {
   return {

@@ -31,6 +31,7 @@ export const pagination = () => {
         filteredRestaurantsByObject,
         pageData,
         limitData,
+        allRestaurants,
       );
 
       res.paginatedResults = results;
@@ -41,6 +42,7 @@ export const pagination = () => {
           filteredRestaurants,
           pageData,
           limitData,
+          allRestaurants,
         );
 
         res.paginatedResults = results;

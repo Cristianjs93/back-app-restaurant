@@ -18,4 +18,5 @@ export type PaginationResult = {
   previous: object;
   data: object[];
   length: number;
+  allRestaurants: object[];
 };
