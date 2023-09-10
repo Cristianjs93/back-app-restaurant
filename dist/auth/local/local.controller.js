@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loginHandler = void 0;
 const user_services_1 = require("../../api/users/user.services");
 const bycript_1 = require("../utils/bycript");
 const auth_services_1 = require("../auth.services");
@@ -39,14 +40,12 @@ function loginHandler(req, res) {
                 email: user.email,
                 role: user.roleId,
             };
-            return res.status(200).send({ token, newUser });
+            res.status(200).send({ token, newUser });
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
-exports.default = {
-    loginHandler,
-};
+exports.loginHandler = loginHandler;

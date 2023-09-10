@@ -19,11 +19,11 @@ function getAllProductsHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const products = yield (0, product_service_1.getAllProducts)();
-            return res.status(200).json(products);
+            res.status(200).json(products);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -38,11 +38,11 @@ function getProductByIdHandler(req, res) {
                     message: 'Product not found',
                 });
             }
-            return res.status(200).json(product);
+            res.status(200).json(product);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -52,11 +52,11 @@ function createProductHandler(req, res) {
         try {
             const data = req.body;
             const product = yield (0, product_service_1.createProduct)(data);
-            return res.status(201).json(product);
+            res.status(201).json(product);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -71,11 +71,11 @@ function updateProductHandler(req, res) {
                     message: 'Product not found',
                 });
             }
-            return res.status(200).json(product);
+            res.status(200).json(product);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -90,11 +90,11 @@ function deleteProductHandler(req, res) {
                     message: 'Product not found',
                 });
             }
-            return res.status(200).json(product);
+            res.status(200).json(product);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }

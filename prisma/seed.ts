@@ -8,22 +8,22 @@ import { productsSeeder } from '../src/api/products/products.seeder';
 const prisma = new PrismaClient();
 
 async function main() {
-  const createRestaurants = await prisma.restaurants.createMany({
+  await prisma.restaurants.createMany({
     data: restaurantsSeeder,
     skipDuplicates: true,
   });
 
-  const createRole = await prisma.roles.createMany({
+  await prisma.roles.createMany({
     data: rolesSeeder,
     skipDuplicates: true,
   });
 
-  const createUser = await prisma.users.createMany({
+  await prisma.users.createMany({
     data: usersSeeder,
     skipDuplicates: true,
   });
 
-  const createReviews = await prisma.reviews.createMany({
+  await prisma.reviews.createMany({
     data: reviewsSeeder,
     skipDuplicates: true,
   });

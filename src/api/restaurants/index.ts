@@ -7,12 +7,13 @@ import {
   deleteRestaurantHandler,
 } from './restaurants.controller';
 import { pagination } from '../../pagination/pagination.controller';
+import { hasRole } from '../../auth/auth.controller';
 
 const router = Router();
 
 router.get('/', pagination(), getAllRestaurantsHandler);
 router.get('/:id', getRestaurantByIdHandler);
-router.post('/', createRestaurantHandler);
+router.post('/', hasRole(['ADMIN']), createRestaurantHandler);
 router.put('/', updateRestaurantHandler);
 router.delete('/', deleteRestaurantHandler);
 

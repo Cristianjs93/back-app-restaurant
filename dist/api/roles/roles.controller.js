@@ -19,11 +19,11 @@ function getAllRoles(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const roles = yield (0, roles_services_1.getRoles)();
-            return res.status(200).send(roles);
+            res.status(200).send(roles);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
