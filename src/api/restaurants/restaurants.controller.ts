@@ -9,6 +9,7 @@ import {
 } from './restaurants.services';
 
 import { ResponsePaginator } from '../../pagination/pagination.types';
+import { menuGenerator } from '../../utils/menuGenerator';
 
 export async function getAllRestaurantsHandler(
   _: Request,
@@ -34,7 +35,9 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(restaurant);
+    const restaurantWithMenu = menuGenerator(restaurant);
+
+    return res.status(200).json(restaurantWithMenu);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

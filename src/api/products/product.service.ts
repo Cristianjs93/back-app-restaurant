@@ -10,8 +10,7 @@ export async function getAllProducts() {
       productName: true,
       price: true,
       description: true,
-      image: true
-    }
+    },
   });
   return products;
 }
@@ -19,19 +18,19 @@ export async function getAllProducts() {
 export async function getProductById(id: string) {
   const products = await prisma.products.findMany({
     where: {
-      id
-    }
+      id,
+    },
   });
   return products;
 }
 
 export async function createProduct(input: Products) {
   const data = {
-    ...input
+    ...input,
   };
 
   const product = await prisma.products.create({
-    data
+    data,
   });
   return product;
 }
@@ -41,16 +40,16 @@ export async function updateProduct(data: Products) {
     where: {
       id: data.id,
     },
-    data
+    data,
   });
-  return products
+  return products;
 }
 
 export async function deleteProduct(id: string) {
   const product = await prisma.products.delete({
     where: {
-      id
-    }
+      id,
+    },
   });
   return product;
 }

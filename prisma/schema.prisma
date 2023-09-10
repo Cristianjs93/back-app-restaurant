@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model Users {
@@ -60,21 +60,18 @@ model Facilities {
   phone        String
   address      String[]
   Orders       Orders[]
-  Products     Products[]
 }
 
 model Products {
-  id          String     @id @default(cuid())
-  productName String
-  price       Int
-  category    String
-  subcategory String
-  description String
-  image       String
-  facility    Facilities @relation(fields: [facilityId], references: [id])
-  facilityId  String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String      @id @default(cuid())
+  productName  String
+  price        Int
+  category     String
+  description  String
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model Restaurants {
@@ -102,6 +99,7 @@ model Restaurants {
   reviews           Reviews[]
   Gallery           Galleries[]
   Facilities        Facilities[]
+  products          Products[]
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
 }
