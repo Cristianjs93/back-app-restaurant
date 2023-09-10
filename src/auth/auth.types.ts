@@ -15,9 +15,8 @@ export type PayloadType = {
 };
 
 export interface AuthRequest extends Request {
-  user?: Users;
+  users?: Users;
 }
-
 export interface AuthRequestRestaurants extends Request {
   restaurants?: Restaurants;
 }

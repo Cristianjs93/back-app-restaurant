@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { isAuthenticated } from '../../auth/auth.controller';
+import { hasRole, isAuthenticated } from '../../auth/auth.controller';
 import {
   getAllUsersHandler,
   getUserByIdHandler,
@@ -11,11 +11,16 @@ import {
 
 const router = Router();
 
-router.get('/', getAllUsersHandler);
-router.get('/:id', getUserByIdHandler);
-router.get('/user', getUserByEmailHandler);
+router.get('/', isAuthenticated, hasRole(['ADMIN']), getAllUsersHandler);
+router.get('/:id', isAuthenticated, hasRole(['ADMIN']), getUserByIdHandler);
+router.get('/user', isAuthenticated, hasRole(['ADMIN']), getUserByEmailHandler);
 router.post('/', createUserHandler);
-router.put('/', updateUserHandler);
-router.delete('/', isAuthenticated, deleteUserHandler);
+router.put(
+  '/',
+  isAuthenticated,
+  hasRole(['ADMIN', 'CLIENT']),
+  updateUserHandler,
+);
+router.delete('/', isAuthenticated, hasRole(['ADMIN']), deleteUserHandler);
 
 export default router;

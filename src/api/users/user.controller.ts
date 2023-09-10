@@ -28,7 +28,8 @@ export async function getAllUsersHandler(req: Request, res: Response) {
 
 export async function getUserByIdHandler(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.user as Users;
+    const { id } = req.users as Users;
+    console.log('EL REQ ES: ' + req.users);
 
     const user = await getUserById(id);
 
@@ -47,7 +48,7 @@ export async function getUserByIdHandler(req: AuthRequest, res: Response) {
 
 export async function getUserByEmailHandler(req: AuthRequest, res: Response) {
   try {
-    const { email } = req.user as Users;
+    const { email } = req.users as Users;
 
     const user = await getUserByEmail(email);
 
@@ -99,7 +100,7 @@ export async function updateUserHandler(req: Request, res: Response) {
 
 export async function deleteUserHandler(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.user as Users;
+    const { id } = req.users as Users;
     const user = await getUserByEmail(id);
 
     if (!user) {

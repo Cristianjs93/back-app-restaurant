@@ -4,6 +4,7 @@ import { getUserByEmail } from '../../api/users/user.services';
 import { comparePassword } from '../utils/bycript';
 import { signToken } from '../auth.services';
 import errorHandler from '../../utils/errorHandler';
+import { getRoleById } from '../auth.services';
 
 export async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
@@ -31,7 +32,7 @@ export async function loginHandler(req: Request, res: Response) {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      role: user.roleId,
+      role: await getRoleById(user.roleId),
     };
 
     res.status(200).send({ token, newUser });
