@@ -7,6 +7,10 @@ export type PaginationQueryParams = {
   filter: string;
   page: string;
   limit: string;
+  cuisine: string;
+  star: string;
+  cost: string;
+  delivery: string;
 };
 
 export type PaginationResult = {
@@ -14,4 +18,5 @@ export type PaginationResult = {
   previous: object;
   data: object[];
   length: number;
+  allRestaurants: object[];
 };

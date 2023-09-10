@@ -3,6 +3,7 @@ import { restaurantsSeeder } from '../src/api/restaurants/restaurants.seeder';
 import { rolesSeeder } from '../src/api/roles/roles.seeder';
 import { usersSeeder } from '../src/api/users/users.seeder';
 import { reviewsSeeder } from '../src/api/reviews/reviews.seeder';
+import { productsSeeder } from '../src/api/products/products.seeder';
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,10 @@ async function main() {
 
   await prisma.reviews.createMany({
     data: reviewsSeeder,
+    skipDuplicates: true,
+  });
+  const createProducts = await prisma.products.createMany({
+    data: productsSeeder,
     skipDuplicates: true,
   });
 }
