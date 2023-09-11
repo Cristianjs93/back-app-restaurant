@@ -15,12 +15,7 @@ router.get('/', isAuthenticated, hasRole(['ADMIN']), getAllUsersHandler);
 router.get('/:id', isAuthenticated, hasRole(['ADMIN']), getUserByIdHandler);
 router.get('/user', isAuthenticated, hasRole(['ADMIN']), getUserByEmailHandler);
 router.post('/', createUserHandler);
-router.put(
-  '/',
-  isAuthenticated,
-  hasRole(['ADMIN', 'CLIENT']),
-  updateUserHandler,
-);
+router.put('/', isAuthenticated, updateUserHandler);
 router.delete('/', isAuthenticated, hasRole(['ADMIN']), deleteUserHandler);
 
 export default router;

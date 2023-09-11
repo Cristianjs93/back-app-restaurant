@@ -6,7 +6,21 @@ import { Users } from './user.types';
 const prisma = new PrismaClient();
 
 export async function getAllUsers() {
-  const users = await prisma.users.findMany();
+  const users = await prisma.users.findMany({
+    select: {
+      id: false,
+      firstName: true,
+      lastName: true,
+      isActive: true,
+      email: true,
+      role: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
   return users;
 }
 
@@ -64,4 +78,13 @@ export async function updateUser(data: Users) {
   });
 
   return user;
+}
+
+export async function countEntities() {
+  const [users, countRoles] = await Promise.all([
+    prisma.users.findMany(),
+    prisma.roles.count(),
+  ]);
+
+  return { users, countRoles };
 }

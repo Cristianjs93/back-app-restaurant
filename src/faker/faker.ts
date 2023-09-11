@@ -6,7 +6,7 @@ import { services } from '../utils/data/services';
 
 const [_, client] = rolesSeeder;
 
-export const fakerUsers = Array.from({ length: 50 }).map(() => {
+export const fakerUsers = Array.from({ length: 5 }).map(() => {
   return {
     id: faker.string.uuid(),
     firstName: faker.internet.userName(),
