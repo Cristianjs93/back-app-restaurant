@@ -1,7 +1,9 @@
 import { Router } from 'express';
+import { hasRole, isAuthenticated } from '../../auth/auth.controller';
 import {
   getAllReviewsHandler,
   getReviewByIdHandler,
+  getReviewsByRestaurantIdHandler,
   createReviewHandler,
   updateReviewHandler,
   deleteReviewHandler,
@@ -9,10 +11,16 @@ import {
 
 const router = Router();
 
-router.get('/', getAllReviewsHandler);
+router.get('/', isAuthenticated, hasRole(['ADMIN']), getAllReviewsHandler);
 router.get('/:id', getReviewByIdHandler);
-router.post('/', createReviewHandler);
-router.put('/', updateReviewHandler);
-router.delete('/', deleteReviewHandler);
+router.get('/restaurant/:id', getReviewsByRestaurantIdHandler);
+router.post(
+  '/',
+  isAuthenticated,
+  hasRole(['ADMIN', 'CLIENT']),
+  createReviewHandler,
+);
+router.put('/', isAuthenticated, hasRole(['ADMIN']), updateReviewHandler);
+router.delete('/', isAuthenticated, hasRole(['ADMIN']), deleteReviewHandler);
 
 export default router;
