@@ -4,10 +4,13 @@ import errorHandler from '../../utils/errorHandler';
 import {
   getAllReviews,
   getReviewById,
+  getReviewsByRestaurantId,
   createReview,
   updateReview,
   deleteReview,
 } from './reviews.services';
+import { getAllUsers } from '../users/user.services';
+import { getReviewsWithUser } from '../../utils/reviewsWithUser';
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
@@ -31,6 +34,29 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
     }
 
     res.status(200).json(review);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    res.status(400).send({ message });
+  }
+}
+
+export async function getReviewsByRestaurantIdHandler(
+  req: Request,
+  res: Response,
+) {
+  try {
+    const { id } = req.params;
+    const reviews = await getReviewsByRestaurantId(id);
+    const users = await getAllUsers();
+    const reviewsWithUser = getReviewsWithUser(reviews, users);
+
+    if (!reviews) {
+      return res.status(404).json({
+        message: 'Review not found',
+      });
+    }
+
+    res.status(200).json(reviewsWithUser);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     res.status(400).send({ message });

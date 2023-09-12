@@ -6,9 +6,9 @@ const prisma = new PrismaClient();
 export async function getAllReviews() {
   const reviews = await prisma.reviews.findMany({
     select: {
-      userId: true,
       restaurantId: true,
-      id: false,
+      userId: true,
+      id: true,
       title: true,
       rating: true,
       message: true,
@@ -26,6 +26,15 @@ export async function getReviewById(id: string) {
   });
 
   return review;
+}
+
+export async function getReviewsByRestaurantId(id: string) {
+  const reviews = await prisma.reviews.findMany({
+    where: {
+      restaurantId: id,
+    },
+  });
+  return reviews;
 }
 
 export async function createReview(input: Reviews) {
