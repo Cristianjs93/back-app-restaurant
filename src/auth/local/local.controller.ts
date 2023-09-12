@@ -29,8 +29,7 @@ export async function loginHandler(req: Request, res: Response) {
     const token = signToken(payload);
 
     const newUser = {
-      firstName: user.firstName,
-      lastName: user.lastName,
+      fullName: `${user.firstName} ${user.lastName}`,
       email: user.email,
       role: await getRoleById(user.roleId),
     };
