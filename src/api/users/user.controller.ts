@@ -28,7 +28,6 @@ export async function getAllUsersHandler(req: Request, res: Response) {
 export async function getUserByIdHandler(req: AuthRequest, res: Response) {
   try {
     const { id } = req.users as Users;
-    console.log('EL REQ ES: ' + req.users);
 
     const user = await getUserById(id);
 

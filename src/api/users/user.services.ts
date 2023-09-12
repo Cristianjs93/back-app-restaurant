@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 import { hashPassword } from '../../auth/utils/bycript';
 import { Users } from './user.types';
+import errorHandler from '../../utils/errorHandler';
 
 const prisma = new PrismaClient();
 
@@ -21,6 +22,7 @@ export async function getAllUsers() {
       },
     },
   });
+
   return users;
 }
 
