@@ -10,7 +10,9 @@ import {
   deleteOrder,
 } from './orders.services';
 
-export async function getAllOrdersHandler(req: Request, res: Response) {
+import { getUserByEmail } from '../users/user.services';
+
+export async function getAllOrdersHandler(_: Request, res: Response) {
   try {
     const orders = await getAllOrders();
     res.status(200).json(orders);
@@ -39,6 +41,14 @@ export async function getOrderByIdHandler(req: Request, res: Response) {
 export async function createOrderHandler(req: Request, res: Response) {
   try {
     const data = req.body;
+
+    const user = await getUserByEmail(data.userEmail);
+
+    delete data.userEmail;
+
+    if (user) {
+      data.userId = user.id as string;
+    }
 
     const order = await createOrder(data);
 
