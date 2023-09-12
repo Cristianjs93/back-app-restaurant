@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { Orders } from './orders.types';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -7,13 +6,12 @@ export async function getAllOrders() {
   const orders = await prisma.orders.findMany({
     select: {
       id: true,
-      detail: true,
       payment: true,
-      status: true,
-      total: true,
-      serviceId: true,
+      delivery_address: true,
+      type: true,
+      products: true,
       userId: true,
-      facilityId: true,
+      restaurantId: true,
     },
   });
   return orders;
@@ -28,7 +26,7 @@ export async function getOrderById(id: string) {
   return order;
 }
 
-export async function createOrder(input: Orders) {
+export async function createOrder(input: Prisma.OrdersCreateInput) {
   const data = {
     ...input,
   };
@@ -40,7 +38,7 @@ export async function createOrder(input: Orders) {
   return order;
 }
 
-export async function updateOrder(data: Orders) {
+export async function updateOrder(data: Prisma.OrdersCreateInput) {
   const order = await prisma.orders.update({
     where: {
       id: data.id,
