@@ -17,7 +17,11 @@ export async function getAllUsersHandler(req: Request, res: Response) {
   try {
     const users = await getAllUsers();
 
-    res.status(200).send(users);
+    const responseUsers = users;
+
+    responseUsers.forEach((user: any) => delete user.id);
+
+    res.status(200).send(responseUsers);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 

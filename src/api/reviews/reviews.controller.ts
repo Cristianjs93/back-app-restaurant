@@ -15,6 +15,7 @@ import { getReviewsWithUser } from '../../utils/reviewsWithUser';
 export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
+
     res.status(200).json(reviews);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
@@ -48,7 +49,6 @@ export async function getReviewsByRestaurantIdHandler(
     const { id } = req.params;
     const reviews = await getReviewsByRestaurantId(id);
     const users = await getAllUsers();
-    const reviewsWithUser = getReviewsWithUser(reviews, users);
 
     if (!reviews) {
       return res.status(404).json({
@@ -56,6 +56,7 @@ export async function getReviewsByRestaurantIdHandler(
       });
     }
 
+    const reviewsWithUser = getReviewsWithUser(reviews, users);
     res.status(200).json(reviewsWithUser);
   } catch (exception: unknown) {
     const message = errorHandler(exception);

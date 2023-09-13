@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export async function getAllUsers() {
   const users = await prisma.users.findMany({
     select: {
-      id: false,
+      id: true,
       firstName: true,
       lastName: true,
       isActive: true,
