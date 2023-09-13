@@ -20,7 +20,7 @@ export async function getAllRestaurantsHandler(
     res.status(200).json(paginatedResults);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -34,14 +34,13 @@ export async function getRestaurantByIdHandler(req: Request, res: Response) {
         message: 'Restaurant not found',
       });
     }
-    
+
     const restaurantWithMenu = menuGenerator(restaurant);
 
     return res.status(200).json(restaurantWithMenu);
-    
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -54,7 +53,7 @@ export async function createRestaurantHandler(req: Request, res: Response) {
     res.status(201).json(restaurant);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -73,7 +72,7 @@ export async function updateRestaurantHandler(req: Request, res: Response) {
     res.status(200).json(restaurant);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -96,6 +95,6 @@ export async function deleteRestaurantHandler(
     res.status(200).json({ message: 'Restaurant deleted succesfully' });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }

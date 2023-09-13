@@ -16,7 +16,7 @@ export async function getAllFacilitiesHandler(req: Request, res: Response) {
     res.status(200).json(facilities);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -34,7 +34,7 @@ export async function getFacilityByIdHandler(req: Request, res: Response) {
     res.status(200).json(facility);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -46,7 +46,7 @@ export async function createFacilityHandler(req: Request, res: Response) {
     res.status(201).json(facility);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -63,7 +63,7 @@ export async function updateFacilityHandler(req: Request, res: Response) {
     res.status(200).json(facility);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -86,6 +86,6 @@ export async function deleteFacilityHandler(
     res.status(200).json(facility);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }

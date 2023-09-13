@@ -18,7 +18,7 @@ export async function getAllOrdersHandler(_: Request, res: Response) {
     res.status(200).json(orders);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -28,13 +28,13 @@ export async function getOrderByIdHandler(req: Request, res: Response) {
     const order = await getOrderById(id);
 
     if (!order) {
-      return res.status(404).send({ message: 'Order not found' });
+      return res.status(404).json({ message: 'Order not found' });
     }
 
     res.status(200).json(order);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 

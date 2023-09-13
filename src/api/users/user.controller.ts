@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Users } from './user.types';
+import { Users, UsersResponse } from './user.types';
 import { AuthRequest } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
 
@@ -17,11 +17,11 @@ export async function getAllUsersHandler(req: Request, res: Response) {
   try {
     const users = await getAllUsers();
 
-    const responseUsers = users;
+    const usersResponse = users;
 
-    responseUsers.forEach((user: any) => delete user.id);
+    usersResponse.forEach((user: UsersResponse) => delete user.id);
 
-    res.status(200).send(responseUsers);
+    res.status(200).send(usersResponse);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 

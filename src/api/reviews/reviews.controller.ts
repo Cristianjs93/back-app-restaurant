@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { Reviews } from './reviews.types';
+import { UsersResponse } from '../users/user.types';
 import { AuthRequestReviews } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
 import {
@@ -12,14 +14,14 @@ import {
 import { getAllUsers } from '../users/user.services';
 import { getReviewsWithUser } from '../../utils/reviewsWithUser';
 
-export async function getAllReviewsHandler(req: Request, res: Response) {
+export async function getAllReviewsHandler(_: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
 
     res.status(200).json(reviews);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -37,7 +39,7 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
     res.status(200).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -47,8 +49,8 @@ export async function getReviewsByRestaurantIdHandler(
 ) {
   try {
     const { id } = req.params;
-    const reviews = await getReviewsByRestaurantId(id);
-    const users = await getAllUsers();
+    const reviews: Reviews[] = await getReviewsByRestaurantId(id);
+    const users: UsersResponse[] = await getAllUsers();
 
     if (!reviews) {
       return res.status(404).json({
@@ -60,7 +62,7 @@ export async function getReviewsByRestaurantIdHandler(
     res.status(200).json(reviewsWithUser);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -71,7 +73,7 @@ export async function createReviewHandler(req: Request, res: Response) {
     res.status(201).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -88,7 +90,7 @@ export async function updateReviewHandler(req: Request, res: Response) {
     res.status(200).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -109,6 +111,6 @@ export async function deleteReviewHandler(
     await deleteReview(id);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
