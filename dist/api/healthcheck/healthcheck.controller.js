@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.healthcheckHandler = void 0;
 const healthcheckHandler = (req, res) => {
-    return res.status(200).send({ message: 'Server ok' });
+    res.status(200).send({ message: 'Server ok' });
 };
 exports.healthcheckHandler = healthcheckHandler;

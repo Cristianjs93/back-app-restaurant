@@ -18,7 +18,7 @@ const routes = (app: Application) => {
   app.use('/api/services', servicesRouter);
   app.use('/api/orders', ordersRouter);
   app.use('/api/auth/local', authLocalRouter);
-  app.use('/api/createUser', userRouter);
+  app.use('/api/users', userRouter);
   app.use('/api/products', productsRouter);
   app.use('/api/roles', rolesRouter);
 };

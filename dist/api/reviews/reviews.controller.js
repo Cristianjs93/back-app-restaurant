@@ -19,11 +19,11 @@ function getAllReviewsHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const reviews = yield (0, reviews_services_1.getAllReviews)();
-            return res.status(200).json(reviews);
+            res.status(200).json(reviews);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -38,11 +38,11 @@ function getReviewByIdHandler(req, res) {
                     message: 'Review not found',
                 });
             }
-            return res.status(200).json(review);
+            res.status(200).json(review);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -52,11 +52,11 @@ function createReviewHandler(req, res) {
         try {
             const data = req.body;
             const review = yield (0, reviews_services_1.createReview)(data);
-            return res.status(201).json(review);
+            res.status(201).json(review);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -69,11 +69,11 @@ function updateReviewHandler(req, res) {
             if (!review) {
                 return res.status(404).json({ message: 'Review not found' });
             }
-            return res.status(200).json(review);
+            res.status(200).json(review);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -88,11 +88,11 @@ function deleteReviewHandler(req, res) {
                     message: 'User not found',
                 });
             }
-            return yield (0, reviews_services_1.deleteReview)(id);
+            yield (0, reviews_services_1.deleteReview)(id);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }

@@ -27,6 +27,7 @@ export async function getAllRestaurants() {
       delivery_time: true,
       logo: true,
       services: true,
+      products: true,
     },
   });
   return restaurants;
@@ -59,6 +60,7 @@ export async function getRestaurantById(id: string) {
       delivery_time: true,
       logo: true,
       services: true,
+      products: true,
     },
   });
 

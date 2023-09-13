@@ -19,11 +19,11 @@ function getAllOrdersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const orders = yield (0, orders_services_1.getAllOrders)();
-            return res.status(200).json(orders);
+            res.status(200).json(orders);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -36,11 +36,11 @@ function getOrderByIdHandler(req, res) {
             if (!order) {
                 return res.status(404).send({ message: 'Order not found' });
             }
-            return res.status(200).json(order);
+            res.status(200).json(order);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).send({ message });
+            res.status(400).send({ message });
         }
     });
 }
@@ -50,11 +50,11 @@ function createOrderHandler(req, res) {
         try {
             const data = req.body;
             const order = yield (0, orders_services_1.createOrder)(data);
-            return res.status(201).json(order);
+            res.status(201).json(order);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -67,11 +67,11 @@ function updateOrderHandler(req, res) {
             if (!order) {
                 return res.status(404).json({ message: 'Order not found' });
             }
-            return res.status(200).json(order);
+            res.status(200).json(order);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -85,11 +85,11 @@ function deleteOrderHandler(req, res) {
                 return res.status(404).json({ message: 'Order not found' });
             }
             yield (0, orders_services_1.deleteOrder)(id);
-            return res.status(200).json({ message: 'Order deleted succesfully' });
+            res.status(200).json({ message: 'Order deleted succesfully' });
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            return res.status(400).json({ message });
+            res.status(400).json({ message });
         }
     });
 }

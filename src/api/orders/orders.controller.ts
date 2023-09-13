@@ -10,13 +10,15 @@ import {
   deleteOrder,
 } from './orders.services';
 
-export async function getAllOrdersHandler(req: Request, res: Response) {
+import { getUserByEmail } from '../users/user.services';
+
+export async function getAllOrdersHandler(_: Request, res: Response) {
   try {
     const orders = await getAllOrders();
-    return res.status(200).json(orders);
+    res.status(200).json(orders);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -29,10 +31,10 @@ export async function getOrderByIdHandler(req: Request, res: Response) {
       return res.status(404).send({ message: 'Order not found' });
     }
 
-    return res.status(200).json(order);
+    res.status(200).json(order);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -40,13 +42,21 @@ export async function createOrderHandler(req: Request, res: Response) {
   try {
     const data = req.body;
 
+    const user = await getUserByEmail(data.userEmail);
+
+    delete data.userEmail;
+
+    if (user) {
+      data.userId = user.id as string;
+    }
+
     const order = await createOrder(data);
 
-    return res.status(201).json(order);
+    res.status(201).json(order);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -59,10 +69,10 @@ export async function updateOrderHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    return res.status(200).json(order);
+    res.status(200).json(order);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -80,9 +90,9 @@ export async function deleteOrderHandler(
 
     await deleteOrder(id);
 
-    return res.status(200).json({ message: 'Order deleted succesfully' });
+    res.status(200).json({ message: 'Order deleted succesfully' });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).json({ message });
+    res.status(400).json({ message });
   }
 }

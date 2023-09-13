@@ -4,8 +4,9 @@ import { getUserByEmail } from '../../api/users/user.services';
 import { comparePassword } from '../utils/bycript';
 import { signToken } from '../auth.services';
 import errorHandler from '../../utils/errorHandler';
+import { getRoleById } from '../auth.services';
 
-async function loginHandler(req: Request, res: Response) {
+export async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
 
   try {
@@ -28,19 +29,14 @@ async function loginHandler(req: Request, res: Response) {
     const token = signToken(payload);
 
     const newUser = {
-      firstName: user.firstName,
-      lastName: user.lastName,
+      fullName: `${user.firstName} ${user.lastName}`,
       email: user.email,
-      role: user.roleId,
+      role: await getRoleById(user.roleId),
     };
 
-    return res.status(200).send({ token, newUser });
+    res.status(200).send({ token, newUser });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
-
-export default {
-  loginHandler,
-};

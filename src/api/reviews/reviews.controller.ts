@@ -4,18 +4,22 @@ import errorHandler from '../../utils/errorHandler';
 import {
   getAllReviews,
   getReviewById,
+  getReviewsByRestaurantId,
   createReview,
   updateReview,
   deleteReview,
 } from './reviews.services';
+import { getAllUsers } from '../users/user.services';
+import { getReviewsWithUser } from '../../utils/reviewsWithUser';
 
 export async function getAllReviewsHandler(req: Request, res: Response) {
   try {
     const reviews = await getAllReviews();
-    return res.status(200).json(reviews);
+
+    res.status(200).json(reviews);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -30,10 +34,33 @@ export async function getReviewByIdHandler(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(review);
+    res.status(200).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
+  }
+}
+
+export async function getReviewsByRestaurantIdHandler(
+  req: Request,
+  res: Response,
+) {
+  try {
+    const { id } = req.params;
+    const reviews = await getReviewsByRestaurantId(id);
+    const users = await getAllUsers();
+
+    if (!reviews) {
+      return res.status(404).json({
+        message: 'Review not found',
+      });
+    }
+
+    const reviewsWithUser = getReviewsWithUser(reviews, users);
+    res.status(200).json(reviewsWithUser);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    res.status(400).send({ message });
   }
 }
 
@@ -41,10 +68,10 @@ export async function createReviewHandler(req: Request, res: Response) {
   try {
     const data = req.body;
     const review = await createReview(data);
-    return res.status(201).json(review);
+    res.status(201).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -58,10 +85,10 @@ export async function updateReviewHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'Review not found' });
     }
 
-    return res.status(200).json(review);
+    res.status(200).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }
 
@@ -79,9 +106,9 @@ export async function deleteReviewHandler(
       });
     }
 
-    return await deleteReview(id);
+    await deleteReview(id);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    return res.status(400).send({ message });
+    res.status(400).send({ message });
   }
 }

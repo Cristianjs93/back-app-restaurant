@@ -1,38 +1,33 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es2021: true,
-  },
-  extends: [
-    'airbnb-base',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
-      parserOptions: {
-        sourceType: 'script',
-      },
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
     },
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-  },
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  rules: {
-    'arrow-body-style': ['error', 'always'],
-    '@typescript-eslint/no-explicit-any': 'off',
-    'no-nested-ternary': 'off',
-    'import/prefer-default-export': [
-      ('off'),
-      { target: 'single' },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
     ],
-  },
-};
+    "overrides": [
+        {
+          "files": [
+            ".eslintrc.{js,cjs}"
+          ],
+          "parserOptions": {
+            "sourceType": "script"
+          }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-unused-vars': 'off'
+    }
+}

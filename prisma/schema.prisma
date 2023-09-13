@@ -32,25 +32,22 @@ model Roles {
 }
 
 model Orders {
-  id         String     @id @default(cuid())
-  detail     String
-  payment    Int
-  status     String
-  total      Int
-  service    Services   @relation(fields: [serviceId], references: [id])
-  serviceId  String
-  user       Users      @relation(fields: [userId], references: [id])
-  userId     String
-  facility   Facilities @relation(fields: [facilityId], references: [id])
-  facilityId String
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id               String      @id @default(cuid())
+  payment          Int
+  delivery_address Json
+  type             String
+  products         Json[]
+  restaurant       Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId     String
+  user             Users       @relation(fields: [userId], references: [id])
+  userId           String
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 }
 
 model Services {
-  id    String   @id @default(cuid())
-  type  String
-  Order Orders[]
+  id   String @id @default(cuid())
+  type String
 }
 
 model Facilities {
@@ -59,22 +56,18 @@ model Facilities {
   restaurantId String
   phone        String
   address      String[]
-  Orders       Orders[]
-  Products     Products[]
 }
 
 model Products {
-  id          String     @id @default(cuid())
-  productName String
-  price       Int
-  category    String
-  subcategory String
-  description String
-  image       String
-  facility    Facilities @relation(fields: [facilityId], references: [id])
-  facilityId  String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String      @id @default(cuid())
+  productName  String
+  price        Int
+  category     String
+  description  String
+  restaurant   Restaurants @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model Restaurants {
@@ -102,8 +95,10 @@ model Restaurants {
   reviews           Reviews[]
   Gallery           Galleries[]
   Facilities        Facilities[]
+  products          Products[]
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
+  Orders            Orders[]
 }
 
 model Galleries {
