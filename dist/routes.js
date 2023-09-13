@@ -21,7 +21,7 @@ const routes = (app) => {
     app.use('/api/services', index_5.default);
     app.use('/api/orders', index_6.default);
     app.use('/api/auth/local', index_7.default);
-    app.use('/api/createUser', index_8.default);
+    app.use('/api/users', index_8.default);
     app.use('/api/products', index_9.default);
     app.use('/api/roles', index_10.default);
 };

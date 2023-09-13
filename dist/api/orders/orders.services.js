@@ -17,13 +17,12 @@ function getAllOrders() {
         const orders = yield prisma.orders.findMany({
             select: {
                 id: true,
-                detail: true,
                 payment: true,
-                status: true,
-                total: true,
-                serviceId: true,
+                delivery_address: true,
+                type: true,
+                products: true,
                 userId: true,
-                facilityId: true,
+                restaurantId: true,
             },
         });
         return orders;

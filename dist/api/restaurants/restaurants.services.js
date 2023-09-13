@@ -37,6 +37,7 @@ function getAllRestaurants() {
                 delivery_time: true,
                 logo: true,
                 services: true,
+                products: true,
             },
         });
         return restaurants;
@@ -71,6 +72,7 @@ function getRestaurantById(id) {
                 delivery_time: true,
                 logo: true,
                 services: true,
+                products: true,
             },
         });
         return restaurants;

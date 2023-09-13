@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteReview = exports.updateReview = exports.createReview = exports.getReviewById = exports.getAllReviews = void 0;
+exports.deleteReview = exports.updateReview = exports.createReview = exports.getReviewsByRestaurantId = exports.getReviewById = exports.getAllReviews = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 function getAllReviews() {
     return __awaiter(this, void 0, void 0, function* () {
         const reviews = yield prisma.reviews.findMany({
             select: {
-                userId: true,
                 restaurantId: true,
-                id: false,
+                userId: true,
+                id: true,
                 title: true,
                 rating: true,
                 message: true,
@@ -40,6 +40,17 @@ function getReviewById(id) {
     });
 }
 exports.getReviewById = getReviewById;
+function getReviewsByRestaurantId(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const reviews = yield prisma.reviews.findMany({
+            where: {
+                restaurantId: id,
+            },
+        });
+        return reviews;
+    });
+}
+exports.getReviewsByRestaurantId = getReviewsByRestaurantId;
 function createReview(input) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = Object.assign({}, input);

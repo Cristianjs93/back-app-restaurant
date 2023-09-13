@@ -9,13 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.deleteUser = exports.getUserByEmail = exports.getUserById = exports.createUser = exports.getAllUsers = void 0;
+exports.countEntities = exports.updateUser = exports.deleteUser = exports.getUserByEmail = exports.getUserById = exports.createUser = exports.getAllUsers = void 0;
 const client_1 = require("@prisma/client");
 const bycript_1 = require("../../auth/utils/bycript");
 const prisma = new client_1.PrismaClient();
 function getAllUsers() {
     return __awaiter(this, void 0, void 0, function* () {
-        const users = yield prisma.users.findMany();
+        const users = yield prisma.users.findMany({
+            select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                isActive: true,
+                email: true,
+                role: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
+        });
         return users;
     });
 }
@@ -76,3 +90,13 @@ function updateUser(data) {
     });
 }
 exports.updateUser = updateUser;
+function countEntities() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [users, countRoles] = yield Promise.all([
+            prisma.users.findMany(),
+            prisma.roles.count(),
+        ]);
+        return { users, countRoles };
+    });
+}
+exports.countEntities = countEntities;

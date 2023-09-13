@@ -14,14 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserHandler = exports.updateUserHandler = exports.createUserHandler = exports.getUserByEmailHandler = exports.getUserByIdHandler = exports.getAllUsersHandler = void 0;
 const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
-const nodemailer_1 = require("../../config/nodemailer");
-const email_1 = require("../../utils/email");
 const user_services_1 = require("./user.services");
+const sendGrid_1 = require("../../config/sendGrid");
 function getAllUsersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const users = yield (0, user_services_1.getAllUsers)();
-            res.status(200).send(users);
+            const responseUsers = users;
+            responseUsers.forEach((user) => delete user.id);
+            res.status(200).send(responseUsers);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
@@ -33,7 +34,7 @@ exports.getAllUsersHandler = getAllUsersHandler;
 function getUserByIdHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id } = req.user;
+            const { id } = req.users;
             const user = yield (0, user_services_1.getUserById)(id);
             if (!user) {
                 return res.status(404).json({
@@ -52,7 +53,7 @@ exports.getUserByIdHandler = getUserByIdHandler;
 function getUserByEmailHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { email } = req.user;
+            const { email } = req.users;
             const user = yield (0, user_services_1.getUserByEmail)(email);
             if (!user) {
                 return res.status(404).json({
@@ -73,7 +74,17 @@ function createUserHandler(req, res) {
         try {
             const data = req.body;
             const user = yield (0, user_services_1.createUser)(data);
-            yield (0, nodemailer_1.sendNodemailer)((0, email_1.welcomeEmail)(user));
+            const emailData = {
+                from: 'AdminRicaApp <proyect.restaurant@gmail.com>',
+                to: user.email,
+                subjet: 'Welcome to Rica App',
+                templateId: 'd-3db2b553b737446a8f0d7e80e706e6fe',
+                dynamic_template_data: {
+                    firstname: user.firstName,
+                    lastname: user.lastName,
+                },
+            };
+            (0, sendGrid_1.sendMailSenGrid)(emailData);
             res.status(201).json(user);
         }
         catch (exception) {
@@ -105,7 +116,7 @@ exports.updateUserHandler = updateUserHandler;
 function deleteUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id } = req.user;
+            const { id } = req.users;
             const user = yield (0, user_services_1.getUserByEmail)(id);
             if (!user) {
                 return res.status(404).json({

@@ -17,6 +17,7 @@ const user_services_1 = require("../../api/users/user.services");
 const bycript_1 = require("../utils/bycript");
 const auth_services_1 = require("../auth.services");
 const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
+const auth_services_2 = require("../auth.services");
 function loginHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { email, password } = req.body;
@@ -35,10 +36,9 @@ function loginHandler(req, res) {
             };
             const token = (0, auth_services_1.signToken)(payload);
             const newUser = {
-                firstName: user.firstName,
-                lastName: user.lastName,
+                fullName: `${user.firstName} ${user.lastName}`,
                 email: user.email,
-                role: user.roleId,
+                role: yield (0, auth_services_2.getRoleById)(user.roleId),
             };
             res.status(200).send({ token, newUser });
         }
