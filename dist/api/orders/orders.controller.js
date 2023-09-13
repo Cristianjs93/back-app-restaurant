@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteOrderHandler = exports.updateOrderHandler = exports.createOrderHandler = exports.getOrderByIdHandler = exports.getAllOrdersHandler = void 0;
 const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
 const orders_services_1 = require("./orders.services");
-function getAllOrdersHandler(req, res) {
+const user_services_1 = require("../users/user.services");
+function getAllOrdersHandler(_, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const orders = yield (0, orders_services_1.getAllOrders)();
@@ -49,6 +50,11 @@ function createOrderHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const data = req.body;
+            const user = yield (0, user_services_1.getUserByEmail)(data.userEmail);
+            delete data.userEmail;
+            if (user) {
+                data.userId = user.id;
+            }
             const order = yield (0, orders_services_1.createOrder)(data);
             res.status(201).json(order);
         }

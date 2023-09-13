@@ -12,9 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteReviewHandler = exports.updateReviewHandler = exports.createReviewHandler = exports.getReviewByIdHandler = exports.getAllReviewsHandler = void 0;
+exports.deleteReviewHandler = exports.updateReviewHandler = exports.createReviewHandler = exports.getReviewsByRestaurantIdHandler = exports.getReviewByIdHandler = exports.getAllReviewsHandler = void 0;
 const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
 const reviews_services_1 = require("./reviews.services");
+const user_services_1 = require("../users/user.services");
+const reviewsWithUser_1 = require("../../utils/reviewsWithUser");
 function getAllReviewsHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -47,6 +49,27 @@ function getReviewByIdHandler(req, res) {
     });
 }
 exports.getReviewByIdHandler = getReviewByIdHandler;
+function getReviewsByRestaurantIdHandler(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { id } = req.params;
+            const reviews = yield (0, reviews_services_1.getReviewsByRestaurantId)(id);
+            const users = yield (0, user_services_1.getAllUsers)();
+            if (!reviews) {
+                return res.status(404).json({
+                    message: 'Review not found',
+                });
+            }
+            const reviewsWithUser = (0, reviewsWithUser_1.getReviewsWithUser)(reviews, users);
+            res.status(200).json(reviewsWithUser);
+        }
+        catch (exception) {
+            const message = (0, errorHandler_1.default)(exception);
+            res.status(400).send({ message });
+        }
+    });
+}
+exports.getReviewsByRestaurantIdHandler = getReviewsByRestaurantIdHandler;
 function createReviewHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

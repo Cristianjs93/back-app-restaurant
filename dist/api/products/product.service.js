@@ -20,8 +20,7 @@ function getAllProducts() {
                 productName: true,
                 price: true,
                 description: true,
-                image: true
-            }
+            },
         });
         return products;
     });
@@ -31,8 +30,8 @@ function getProductById(id) {
     return __awaiter(this, void 0, void 0, function* () {
         const products = yield prisma.products.findMany({
             where: {
-                id
-            }
+                id,
+            },
         });
         return products;
     });
@@ -42,7 +41,7 @@ function createProduct(input) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = Object.assign({}, input);
         const product = yield prisma.products.create({
-            data
+            data,
         });
         return product;
     });
@@ -54,7 +53,7 @@ function updateProduct(data) {
             where: {
                 id: data.id,
             },
-            data
+            data,
         });
         return products;
     });
@@ -64,8 +63,8 @@ function deleteProduct(id) {
     return __awaiter(this, void 0, void 0, function* () {
         const product = yield prisma.products.delete({
             where: {
-                id
-            }
+                id,
+            },
         });
         return product;
     });

@@ -12,33 +12,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.pagination = void 0;
 const restaurants_services_1 = require("../api/restaurants/restaurants.services");
 const filters_1 = require("../utils/filters");
+const paginationGenerator_1 = require("../utils/paginationGenerator");
 const pagination = () => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-        const { filter, page, limit } = req.query;
+        const { filter, page, limit, cuisine, star, cost, delivery } = req.query;
         const pageData = parseInt(page);
         const limitData = parseInt(limit);
         const allRestaurants = yield (0, restaurants_services_1.getAllRestaurants)();
         const filteredRestaurants = (0, filters_1.filteredData)(allRestaurants, filter);
-        const startIndex = (pageData - 1) * limitData;
-        const endIndex = pageData * limitData;
-        const results = {};
-        if (filteredRestaurants) {
-            if (endIndex < filteredRestaurants.length) {
-                results.next = {
-                    page: pageData + 1,
-                    limit: limitData,
-                };
-            }
-            if (startIndex) {
-                results.previous = {
-                    page: pageData - 1,
-                    limit: limitData,
-                };
-            }
-            results.length = filteredRestaurants.length;
-            results.data = filteredRestaurants.slice(startIndex, endIndex);
+        if (cuisine || star || cost || delivery) {
+            const filteredRestaurantsByObject = (0, filters_1.filteredByObject)(filteredRestaurants, cuisine, star, cost, delivery);
+            const results = (0, paginationGenerator_1.paginationGenerator)(filteredRestaurantsByObject, pageData, limitData, allRestaurants);
             res.paginatedResults = results;
             next();
+        }
+        else {
+            if (filteredRestaurants) {
+                const results = (0, paginationGenerator_1.paginationGenerator)(filteredRestaurants, pageData, limitData, allRestaurants);
+                res.paginatedResults = results;
+                next();
+            }
         }
     });
 };

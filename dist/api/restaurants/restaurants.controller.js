@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteRestaurantHandler = exports.updateRestaurantHandler = exports.createRestaurantHandler = exports.getRestaurantByIdHandler = exports.getAllRestaurantsHandler = void 0;
 const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
 const restaurants_services_1 = require("./restaurants.services");
+const menuGenerator_1 = require("../../utils/menuGenerator");
 function getAllRestaurantsHandler(_, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -38,7 +39,8 @@ function getRestaurantByIdHandler(req, res) {
                     message: 'Restaurant not found',
                 });
             }
-            res.status(200).json(restaurant);
+            const restaurantWithMenu = (0, menuGenerator_1.menuGenerator)(restaurant);
+            return res.status(200).json(restaurantWithMenu);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
