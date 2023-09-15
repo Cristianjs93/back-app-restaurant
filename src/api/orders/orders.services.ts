@@ -6,12 +6,18 @@ export async function getAllOrders() {
   const orders = await prisma.orders.findMany({
     select: {
       id: true,
-      payment: true,
-      delivery_address: true,
-      type: true,
-      products: true,
-      userId: true,
       restaurantId: true,
+      userId: true,
+      type: true,
+      delivery_payment: true,
+      delivery_address: true,
+      delivery_products: true,
+      booking_firstName: true,
+      booking_lastName: true,
+      booking_email: true,
+      booking_phone: true,
+      booking_date: true,
+      booking_persons: true,
     },
   });
   return orders;
