@@ -6,13 +6,29 @@ import {
   updateOrderHandler,
   deleteOrderHandler,
 } from './orders.controller';
+import { hasRole, isAuthenticated } from '../../auth/auth.controller';
 
 const router = Router();
 
-router.get('/', getAllOrdersHandler);
+router.get('/', isAuthenticated, hasRole(['ADMIN']), getAllOrdersHandler);
 router.get('/:id', getOrderByIdHandler);
-router.post('/', createOrderHandler);
-router.put('/', updateOrderHandler);
-router.delete('/', deleteOrderHandler);
+router.post(
+  '/',
+  isAuthenticated,
+  hasRole(['ADMIN', 'CLIENT']),
+  createOrderHandler,
+);
+router.put(
+  '/',
+  isAuthenticated,
+  hasRole(['ADMIN', 'CLIENT']),
+  updateOrderHandler,
+);
+router.delete(
+  '/',
+  isAuthenticated,
+  hasRole(['ADMIN', 'CLIENT']),
+  deleteOrderHandler,
+);
 
 export default router;

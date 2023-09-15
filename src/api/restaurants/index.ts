@@ -14,7 +14,7 @@ const router = Router();
 router.get('/', pagination(), getAllRestaurantsHandler);
 router.get('/:id', getRestaurantByIdHandler);
 router.post('/', hasRole(['ADMIN']), createRestaurantHandler);
-router.put('/', updateRestaurantHandler);
-router.delete('/', deleteRestaurantHandler);
+router.put('/', hasRole(['ADMIN', 'RESTAURANT']), updateRestaurantHandler);
+router.delete('/', hasRole(['ADMIN', 'RESTAURANT']), deleteRestaurantHandler);
 
 export default router;
