@@ -7,7 +7,7 @@ export async function getAllOrders() {
     select: {
       id: true,
       restaurantId: true,
-      userId: true,
+      userId: false,
       type: true,
       delivery_payment: true,
       delivery_address: true,
@@ -27,6 +27,21 @@ export async function getOrderById(id: string) {
   const order = await prisma.orders.findUnique({
     where: {
       id,
+    },
+    select: {
+      id: true,
+      restaurantId: true,
+      userId: false,
+      type: true,
+      delivery_payment: true,
+      delivery_address: true,
+      delivery_products: true,
+      booking_firstName: true,
+      booking_lastName: true,
+      booking_email: true,
+      booking_phone: true,
+      booking_date: true,
+      booking_persons: true,
     },
   });
   return order;
