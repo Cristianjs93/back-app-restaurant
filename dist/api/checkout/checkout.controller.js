@@ -19,9 +19,8 @@ const stripe = new stripe_1.default(STRIPE_SECRET_KEY, {
     apiVersion: '2023-08-16',
 });
 const handleCheckout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { paymentMethod, amount } = req.body;
     try {
-        console.log(paymentMethod, amount);
+        const { paymentMethod, amount } = req.body;
         const { id } = paymentMethod;
         const payment = yield stripe.paymentIntents.create({
             payment_method: id,
