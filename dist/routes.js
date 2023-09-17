@@ -13,6 +13,7 @@ const index_7 = __importDefault(require("./auth/local/index"));
 const index_8 = __importDefault(require("./api/users/index"));
 const index_9 = __importDefault(require("./api/products/index"));
 const index_10 = __importDefault(require("./api/roles/index"));
+const index_11 = __importDefault(require("./api/checkout/index"));
 const routes = (app) => {
     app.use('/api/healthcheck', index_1.default);
     app.use('/api/restaurants', index_2.default);
@@ -24,5 +25,6 @@ const routes = (app) => {
     app.use('/api/users', index_8.default);
     app.use('/api/products', index_9.default);
     app.use('/api/roles', index_10.default);
+    app.use('/api/checkout', index_11.default);
 };
 exports.default = routes;

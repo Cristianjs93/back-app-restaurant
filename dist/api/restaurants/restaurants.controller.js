@@ -24,7 +24,7 @@ function getAllRestaurantsHandler(_, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -44,7 +44,7 @@ function getRestaurantByIdHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -58,7 +58,7 @@ function createRestaurantHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -77,7 +77,7 @@ function updateRestaurantHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -97,7 +97,7 @@ function deleteRestaurantHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }

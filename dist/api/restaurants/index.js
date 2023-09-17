@@ -8,6 +8,6 @@ const router = (0, express_1.Router)();
 router.get('/', (0, pagination_controller_1.pagination)(), restaurants_controller_1.getAllRestaurantsHandler);
 router.get('/:id', restaurants_controller_1.getRestaurantByIdHandler);
 router.post('/', (0, auth_controller_1.hasRole)(['ADMIN']), restaurants_controller_1.createRestaurantHandler);
-router.put('/', restaurants_controller_1.updateRestaurantHandler);
-router.delete('/', restaurants_controller_1.deleteRestaurantHandler);
+router.put('/', (0, auth_controller_1.hasRole)(['ADMIN', 'RESTAURANT']), restaurants_controller_1.updateRestaurantHandler);
+router.delete('/', (0, auth_controller_1.hasRole)(['ADMIN', 'RESTAURANT']), restaurants_controller_1.deleteRestaurantHandler);
 exports.default = router;

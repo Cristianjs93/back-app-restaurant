@@ -3,7 +3,7 @@ import { rolesSeeder } from '../roles/roles.seeder';
 import { hashPasswordSync } from '../../auth/utils/bycript';
 import { fakerUsers } from '../../faker/faker';
 
-const [admin] = rolesSeeder;
+const [admin, client] = rolesSeeder;
 
 export const usersSeeder: UsersSeeders[] = [
   {
@@ -41,6 +41,18 @@ export const usersSeeder: UsersSeeders[] = [
     password: hashPasswordSync('1234'),
     isActive: true,
     roleId: admin.id,
+  },
+  {
+    id: 'cllimozdc0004wr3swh067x93',
+    firstName: 'cristian',
+    lastName: 'jimenez',
+    address: 'fake street 123',
+    phone: '5234',
+    email: 'cjs@test.com',
+    age: '29',
+    password: hashPasswordSync('1234'),
+    isActive: true,
+    roleId: client.id,
   },
 
   ...fakerUsers,

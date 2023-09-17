@@ -10,6 +10,7 @@ export function getReviewsWithUser(reviews: Reviews[], users: UsersResponse[]) {
     return {
       ...review,
       user: userForReview.firstName,
+      userEmail: userForReview.email,
     };
   });
 

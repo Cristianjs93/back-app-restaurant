@@ -20,9 +20,9 @@ function getAllUsersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const users = yield (0, user_services_1.getAllUsers)();
-            const responseUsers = users;
-            responseUsers.forEach((user) => delete user.id);
-            res.status(200).send(responseUsers);
+            const usersResponse = users;
+            usersResponse.forEach((user) => delete user.id);
+            res.status(200).send(usersResponse);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
