@@ -11,7 +11,7 @@ import {
   updateReview,
   deleteReview,
 } from './reviews.services';
-import { getAllUsers } from '../users/user.services';
+import { getAllUsers, getUserByEmail } from '../users/user.services';
 import { getReviewsWithUser } from '../../utils/reviewsWithUser';
 
 export async function getAllReviewsHandler(_: Request, res: Response) {
@@ -69,7 +69,17 @@ export async function getReviewsByRestaurantIdHandler(
 export async function createReviewHandler(req: Request, res: Response) {
   try {
     const data = req.body;
-    const review = await createReview(data);
+
+    const userForReview = (await getUserByEmail(
+      data.userEmail,
+    )) as UsersResponse;
+
+    const reviewwithUser = { ...data, userId: userForReview.id };
+
+    delete reviewwithUser.userEmail;
+
+    const review = await createReview(reviewwithUser);
+
     res.status(201).json(review);
   } catch (exception: unknown) {
     const message = errorHandler(exception);

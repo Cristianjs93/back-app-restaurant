@@ -16,7 +16,9 @@ const isAuthenticated = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     var _a, _b;
     const token = (_b = (_a = req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res
+            .status(401)
+            .json({ message: 'Unauthorized! You have to log in first.' });
     }
     const decoded = (0, auth_services_1.verifyToken)(token);
     if (!decoded) {

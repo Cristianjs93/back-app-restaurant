@@ -24,7 +24,7 @@ function getAllOrdersHandler(_, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -35,13 +35,13 @@ function getOrderByIdHandler(req, res) {
             const { id } = req.params;
             const order = yield (0, orders_services_1.getOrderById)(id);
             if (!order) {
-                return res.status(404).send({ message: 'Order not found' });
+                return res.status(404).json({ message: 'Order not found' });
             }
             res.status(200).json(order);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }

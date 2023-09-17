@@ -23,7 +23,7 @@ function getAllFacilitiesHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -42,7 +42,7 @@ function getFacilityByIdHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -56,7 +56,7 @@ function createFacilityHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -73,7 +73,7 @@ function updateFacilityHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -93,7 +93,7 @@ function deleteFacilityHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }

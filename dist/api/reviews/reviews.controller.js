@@ -17,7 +17,7 @@ const errorHandler_1 = __importDefault(require("../../utils/errorHandler"));
 const reviews_services_1 = require("./reviews.services");
 const user_services_1 = require("../users/user.services");
 const reviewsWithUser_1 = require("../../utils/reviewsWithUser");
-function getAllReviewsHandler(req, res) {
+function getAllReviewsHandler(_, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const reviews = yield (0, reviews_services_1.getAllReviews)();
@@ -25,7 +25,7 @@ function getAllReviewsHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -44,7 +44,7 @@ function getReviewByIdHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -65,7 +65,7 @@ function getReviewsByRestaurantIdHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -74,12 +74,15 @@ function createReviewHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const data = req.body;
-            const review = yield (0, reviews_services_1.createReview)(data);
+            const userForReview = (yield (0, user_services_1.getUserByEmail)(data.userEmail));
+            const reviewwithUser = Object.assign(Object.assign({}, data), { userId: userForReview.id });
+            delete reviewwithUser.userEmail;
+            const review = yield (0, reviews_services_1.createReview)(reviewwithUser);
             res.status(201).json(review);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -96,7 +99,7 @@ function updateReviewHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }
@@ -115,7 +118,7 @@ function deleteReviewHandler(req, res) {
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
-            res.status(400).send({ message });
+            res.status(400).json({ message });
         }
     });
 }

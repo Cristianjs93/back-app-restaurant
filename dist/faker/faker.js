@@ -7,7 +7,7 @@ const roles_seeder_1 = require("../api/roles/roles.seeder");
 const cuisines_1 = require("../utils/data/cuisines");
 const services_1 = require("../utils/data/services");
 const [_, client] = roles_seeder_1.rolesSeeder;
-exports.fakerUsers = Array.from({ length: 5 }).map(() => {
+exports.fakerUsers = Array.from({ length: 50 }).map(() => {
     return {
         id: faker_1.faker.string.uuid(),
         firstName: faker_1.faker.internet.userName(),

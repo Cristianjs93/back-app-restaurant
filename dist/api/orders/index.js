@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const orders_controller_1 = require("./orders.controller");
+const auth_controller_1 = require("../../auth/auth.controller");
 const router = (0, express_1.Router)();
-router.get('/', orders_controller_1.getAllOrdersHandler);
+router.get('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN']), orders_controller_1.getAllOrdersHandler);
 router.get('/:id', orders_controller_1.getOrderByIdHandler);
-router.post('/', orders_controller_1.createOrderHandler);
-router.put('/', orders_controller_1.updateOrderHandler);
-router.delete('/', orders_controller_1.deleteOrderHandler);
+router.post('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN', 'CLIENT']), orders_controller_1.createOrderHandler);
+router.put('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN', 'CLIENT']), orders_controller_1.updateOrderHandler);
+router.delete('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN', 'CLIENT']), orders_controller_1.deleteOrderHandler);
 exports.default = router;
