@@ -3,7 +3,7 @@ import { ReviewsSeeder } from './reviews.types';
 import { usersSeeder } from '../users/users.seeder';
 import { restaurantsSeeder } from '../restaurants/restaurants.seeder';
 
-const fakerReviews = Array.from({ length: 400 }).map(() => {
+const fakerReviews = Array.from({ length: 800 }).map(() => {
   return {
     userId:
       usersSeeder[faker.number.int({ min: 0, max: usersSeeder.length - 1 })].id,
