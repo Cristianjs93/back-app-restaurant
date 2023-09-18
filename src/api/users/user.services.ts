@@ -74,19 +74,12 @@ export async function deleteUser(id: string) {
   return user;
 }
 
-export async function updateUser(data: Users) {
+export async function updateUser(id: string, data: Users) {
   const user = await prisma.users.update({
     where: {
-      id: data.id,
+      id: id,
     },
-    data: {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      address: data.address,
-      phone: data.phone,
-      password: data.password,
-      age: data.age,
-    },
+    data,
   });
 
   return user;
