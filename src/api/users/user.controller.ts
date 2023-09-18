@@ -18,7 +18,6 @@ export async function getAllUsersHandler(req: Request, res: Response) {
     const users = await getAllUsers();
 
     res.status(200).send(users);
-    
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 
@@ -91,11 +90,11 @@ export async function createUserHandler(req: Request, res: Response) {
 
 export async function updateUserHandler(req: AuthRequest, res: Response) {
   try {
-    // const { id } = req.users as Users;
-    const data = req.body;
-    console.log(data);
+    const { id } = req.params;
 
-    const user = await updateUser(data);
+    const data = req.body;
+
+    const user = await updateUser(id, data);
 
     if (!user) {
       return res.status(404).json({
