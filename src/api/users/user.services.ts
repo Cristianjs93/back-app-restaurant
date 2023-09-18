@@ -12,6 +12,9 @@ export async function getAllUsers() {
       id: true,
       firstName: true,
       lastName: true,
+      address: true,
+      phone: true,
+      age: true,
       isActive: true,
       email: true,
       role: {
@@ -76,7 +79,14 @@ export async function updateUser(data: Users) {
     where: {
       id: data.id,
     },
-    data,
+    data: {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      address: data.address,
+      phone: data.phone,
+      password: data.password,
+      age: data.age,
+    },
   });
 
   return user;
