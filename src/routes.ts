@@ -9,6 +9,7 @@ import authLocalRouter from './auth/local/index';
 import userRouter from './api/users/index';
 import productsRouter from './api/products/index';
 import rolesRouter from './api/roles/index';
+import checkoutRouter from './api/checkout/index';
 
 const routes = (app: Application) => {
   app.use('/api/healthcheck', healthcheckRouter);
@@ -21,6 +22,7 @@ const routes = (app: Application) => {
   app.use('/api/users', userRouter);
   app.use('/api/products', productsRouter);
   app.use('/api/roles', rolesRouter);
+  app.use('/api/checkout', checkoutRouter);
 };
 
 export default routes;

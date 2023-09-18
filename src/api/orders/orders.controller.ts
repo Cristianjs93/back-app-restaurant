@@ -9,8 +9,10 @@ import {
   updateOrder,
   deleteOrder,
 } from './orders.services';
+import { sendMailSenGrid } from '../../config/sendGrid';
 
 import { getUserByEmail } from '../users/user.services';
+import { UsersResponse } from '../users/user.types';
 
 export async function getAllOrdersHandler(_: Request, res: Response) {
   try {
@@ -18,7 +20,7 @@ export async function getAllOrdersHandler(_: Request, res: Response) {
     res.status(200).json(orders);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -28,13 +30,13 @@ export async function getOrderByIdHandler(req: Request, res: Response) {
     const order = await getOrderById(id);
 
     if (!order) {
-      return res.status(404).send({ message: 'Order not found' });
+      return res.status(404).json({ message: 'Order not found' });
     }
 
     res.status(200).json(order);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
-    res.status(400).send({ message });
+    res.status(400).json({ message });
   }
 }
 
@@ -42,7 +44,7 @@ export async function createOrderHandler(req: Request, res: Response) {
   try {
     const data = req.body;
 
-    const user = await getUserByEmail(data.userEmail);
+    const user = (await getUserByEmail(data.userEmail)) as UsersResponse;
 
     delete data.userEmail;
 
@@ -51,6 +53,19 @@ export async function createOrderHandler(req: Request, res: Response) {
     }
 
     const order = await createOrder(data);
+
+    const emailData = {
+      from: 'AdminRicaApp <proyect.restaurant@gmail.com>',
+      to: user.email,
+      subjet: 'Order created successfully',
+      templateId: 'd-5970a713b8994a4caf27f89cead51aa1',
+      dynamic_template_data: {
+        firstname: user.firstName,
+        lastname: user.lastName,
+        orderId: order.id,
+      },
+    };
+    sendMailSenGrid(emailData);
 
     res.status(201).json(order);
   } catch (exception: unknown) {

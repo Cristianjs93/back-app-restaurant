@@ -4,7 +4,7 @@ exports.productsSeeder = void 0;
 const faker_1 = require("@faker-js/faker");
 const restaurants_seeder_1 = require("../restaurants/restaurants.seeder");
 const category_1 = require("../../utils/data/category");
-const fakerProducts = Array.from({ length: 1000 }).map(() => {
+const fakerProducts = Array.from({ length: 2000 }).map(() => {
     return {
         productName: faker_1.faker.commerce.productName(),
         price: faker_1.faker.number.int({ min: 5, max: 50 }),

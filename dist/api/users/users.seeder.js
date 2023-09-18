@@ -4,7 +4,7 @@ exports.usersSeeder = void 0;
 const roles_seeder_1 = require("../roles/roles.seeder");
 const bycript_1 = require("../../auth/utils/bycript");
 const faker_1 = require("../../faker/faker");
-const [admin] = roles_seeder_1.rolesSeeder;
+const [admin, client] = roles_seeder_1.rolesSeeder;
 exports.usersSeeder = [
     {
         id: 'cllimozdc0001wr3swh067x93',
@@ -41,6 +41,18 @@ exports.usersSeeder = [
         password: (0, bycript_1.hashPasswordSync)('1234'),
         isActive: true,
         roleId: admin.id,
+    },
+    {
+        id: 'cllimozdc0004wr3swh067x93',
+        firstName: 'cristian',
+        lastName: 'jimenez',
+        address: 'fake street 123',
+        phone: '5234',
+        email: 'cjs@test.com',
+        age: '29',
+        password: (0, bycript_1.hashPasswordSync)('1234'),
+        isActive: true,
+        roleId: client.id,
     },
     ...faker_1.fakerUsers,
 ];

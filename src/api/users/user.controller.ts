@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Users } from './user.types';
+import { Users, UsersResponse } from './user.types';
 import { AuthRequest } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
 
@@ -18,6 +18,7 @@ export async function getAllUsersHandler(req: Request, res: Response) {
     const users = await getAllUsers();
 
     res.status(200).send(users);
+    
   } catch (exception: unknown) {
     const message = errorHandler(exception);
 

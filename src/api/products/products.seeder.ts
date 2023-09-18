@@ -3,7 +3,7 @@ import { ProductsSeeder } from './product.types';
 import { restaurantsSeeder } from '../restaurants/restaurants.seeder';
 import { categories } from '../../utils/data/category';
 
-const fakerProducts = Array.from({ length: 1000 }).map(() => {
+const fakerProducts = Array.from({ length: 2000 }).map(() => {
   return {
     productName: faker.commerce.productName(),
     price: faker.number.int({ min: 5, max: 50 }),
