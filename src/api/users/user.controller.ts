@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
-import { Users, UsersResponse } from './user.types';
+import { validationResult, Result } from 'express-validator';
+import { Users } from './user.types';
+import { Roles } from '../roles/roles.types';
 import { AuthRequest } from '../../auth/auth.types';
 import errorHandler from '../../utils/errorHandler';
+import { welcomeEmail } from '../../utils/emailSendGrid';
 
 import {
   getAllUsers,
@@ -111,15 +114,15 @@ export async function updateUserHandler(req: AuthRequest, res: Response) {
 
 export async function deleteUserHandler(req: AuthRequest, res: Response) {
   try {
-    const { id } = req.users as Users;
-    const user = await getUserByEmail(id);
+    const { id } = req.params;
+
+    const user = await deleteUser(id);
 
     if (!user) {
       return res.status(404).json({
         message: 'User not found',
       });
     }
-    await deleteUser(id);
 
     res.status(200).send(user);
   } catch (exception: unknown) {

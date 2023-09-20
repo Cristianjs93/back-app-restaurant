@@ -1,13 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 
-import { hashPassword } from '../../auth/utils/bycript';
+import { hashPassword, createHashToken } from '../../auth/utils/bycript';
 import { Users } from './user.types';
-import errorHandler from '../../utils/errorHandler';
 
 const prisma = new PrismaClient();
 
 export async function getAllUsers() {
   const users = await prisma.users.findMany({
+    where: {
+      isActive: true,
+    },
     select: {
       id: true,
       firstName: true,
@@ -65,10 +67,11 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function deleteUser(id: string) {
-  const user = await prisma.users.delete({
+  const user = await prisma.users.update({
     where: {
-      id,
+      id: id,
     },
+    data: { isActive: false },
   });
 
   return user;
@@ -83,13 +86,4 @@ export async function updateUser(id: string, data: Users) {
   });
 
   return user;
-}
-
-export async function countEntities() {
-  const [users, countRoles] = await Promise.all([
-    prisma.users.findMany(),
-    prisma.roles.count(),
-  ]);
-
-  return { users, countRoles };
 }

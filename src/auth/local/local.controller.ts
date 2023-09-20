@@ -16,7 +16,7 @@ export async function loginHandler(req: Request, res: Response) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const isMatch = await comparePassword(password, user.password);
+    const isMatch = await comparePassword(password, user.password as string);
 
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
