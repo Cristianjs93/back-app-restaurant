@@ -82,7 +82,15 @@ export async function updateUser(id: string, data: Users) {
     where: {
       id: id,
     },
-    data,
+    data: {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      address: data.address,
+      phone: data.phone,
+      email: data.email,
+      password: data.password,
+      age: data.age,
+    },
   });
 
   return user;
