@@ -16,7 +16,7 @@ model Users {
   email     String    @unique
   age       String
   password  String
-  isActive  Boolean   @default(false)
+  isActive  Boolean   @default(true)
   Review    Reviews[]
   role      Roles     @relation(fields: [roleId], references: [id])
   roleId    String
