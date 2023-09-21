@@ -20,9 +20,7 @@ function getAllUsersHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const users = yield (0, user_services_1.getAllUsers)();
-            const usersResponse = users;
-            usersResponse.forEach((user) => delete user.id);
-            res.status(200).send(usersResponse);
+            res.status(200).send(users);
         }
         catch (exception) {
             const message = (0, errorHandler_1.default)(exception);
@@ -97,8 +95,9 @@ exports.createUserHandler = createUserHandler;
 function updateUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const { id } = req.params;
             const data = req.body;
-            const user = yield (0, user_services_1.updateUser)(data);
+            const user = yield (0, user_services_1.updateUser)(id, data);
             if (!user) {
                 return res.status(404).json({
                     message: 'User not found',
@@ -116,14 +115,13 @@ exports.updateUserHandler = updateUserHandler;
 function deleteUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id } = req.users;
-            const user = yield (0, user_services_1.getUserByEmail)(id);
+            const { id } = req.params;
+            const user = yield (0, user_services_1.deleteUser)(id);
             if (!user) {
                 return res.status(404).json({
                     message: 'User not found',
                 });
             }
-            yield (0, user_services_1.deleteUser)(id);
             res.status(200).send(user);
         }
         catch (exception) {

@@ -8,6 +8,6 @@ router.get('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole
 router.get('/:id', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN']), user_controller_1.getUserByIdHandler);
 router.get('/user', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN']), user_controller_1.getUserByEmailHandler);
 router.post('/', user_controller_1.createUserHandler);
-router.put('/', auth_controller_1.isAuthenticated, user_controller_1.updateUserHandler);
-router.delete('/', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN']), user_controller_1.deleteUserHandler);
+router.put('/:id', user_controller_1.updateUserHandler);
+router.delete('/:id', auth_controller_1.isAuthenticated, (0, auth_controller_1.hasRole)(['ADMIN']), user_controller_1.deleteUserHandler);
 exports.default = router;

@@ -9,17 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.countEntities = exports.updateUser = exports.deleteUser = exports.getUserByEmail = exports.getUserById = exports.createUser = exports.getAllUsers = void 0;
+exports.updateUser = exports.deleteUser = exports.getUserByEmail = exports.getUserById = exports.createUser = exports.getAllUsers = void 0;
 const client_1 = require("@prisma/client");
 const bycript_1 = require("../../auth/utils/bycript");
 const prisma = new client_1.PrismaClient();
 function getAllUsers() {
     return __awaiter(this, void 0, void 0, function* () {
         const users = yield prisma.users.findMany({
+            where: {
+                isActive: true,
+            },
             select: {
                 id: true,
                 firstName: true,
                 lastName: true,
+                address: true,
+                phone: true,
+                age: true,
                 isActive: true,
                 email: true,
                 role: {
@@ -69,34 +75,33 @@ function getUserByEmail(email) {
 exports.getUserByEmail = getUserByEmail;
 function deleteUser(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield prisma.users.delete({
+        const user = yield prisma.users.update({
             where: {
-                id,
+                id: id,
             },
+            data: { isActive: false },
         });
         return user;
     });
 }
 exports.deleteUser = deleteUser;
-function updateUser(data) {
+function updateUser(id, data) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield prisma.users.update({
             where: {
-                id: data.id,
+                id: id,
             },
-            data,
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                address: data.address,
+                phone: data.phone,
+                email: data.email,
+                password: data.password,
+                age: data.age,
+            },
         });
         return user;
     });
 }
 exports.updateUser = updateUser;
-function countEntities() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const [users, countRoles] = yield Promise.all([
-            prisma.users.findMany(),
-            prisma.roles.count(),
-        ]);
-        return { users, countRoles };
-    });
-}
-exports.countEntities = countEntities;

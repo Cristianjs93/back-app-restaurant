@@ -9,7 +9,6 @@ export const welcomeEmail = (user: Users) => {
     dynamic_template_data: {
       firstName: user.firstName,
       lastName: user.lastName,
-      redirectUrl: `http://localhost:5173/verify-account/${user.resetToken}`,
     },
   };
 
